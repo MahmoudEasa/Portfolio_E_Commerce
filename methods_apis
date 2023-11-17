@@ -1,0 +1,101 @@
+Methods:
+	BaseModel:
+		__str__ (print):
+			Return ((f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"))
+		
+		save(self):
+			"""updates the attribute 'updated_at' with the current datetime"""
+		        self.updated_at = datetime.utcnow()
+        		models.storage.new(self)
+		        models.storage.save()
+	
+		to_dict(self):
+			"""returns a dictionary containing all keys/values of the instance"""
+
+		delete(self):
+			"""delete the current instance from the storage"""
+
+	DBStorage:
+		all(self, cls=None):
+			"""Query on the curret database session all objects of the given class.
+		            If cls is None: queries all types of objects.
+		            Return:
+		                Dict of queried classes in the format <class name>.<obj id> = obj.
+		        """
+
+		new(self, obj):
+		        """ add the object to the current database session """
+
+		def save(self):
+		        """ commit all changes of the current database session """
+
+		def delete(self, obj=None):
+		        """ delete from the current database session """
+
+		def reload(self):
+		        """ create all tables in the database &
+		            the current database session
+		        """
+
+		def close(self):
+		        """ close working session"""
+
+		def get(self, cls, id):
+		        """ Returns the object based on the class name and its ID, or
+		            None if not found
+		        """
+
+		def count(self, cls=None):
+		        """ count the number of objects in storage """
+
+	console:
+		do_create(self, arg):
+		        """Creates a new instance of BaseModel,
+		            saves it (to the DB) and prints the id
+
+		            Ex:
+                		$ create BaseModel
+				$ create BaseModel "name=name" "email=email"
+		        """
+
+		def do_show(self, arg):
+		        """Prints the string representation of an instance
+		            based on the class name and id
+
+		            Ex:
+		                $ show BaseModel 1234-1234-1234
+		        """
+
+		do_destroy(self, arg):
+		        """Deletes an instance based on the class name
+		            and id (save the change into the JSON file)
+
+		            Ex:
+                		$ destroy BaseModel 1234-1234-1234
+		        """
+
+		def do_all(self, arg):
+		        """Prints all string representation of all instances
+		            based or not on the class name
+
+		            Ex:
+                		$ all BaseModel
+		                $ all
+		        """
+
+		do_update(self, arg):
+		        """Updates an instance based on the class name and id by adding
+		            or updating attribute (save the change into the JSON file)
+
+		            Usage:
+		                update <class name> <id> <attribute name> "<attribute value>"
+
+		            Ex:
+                		$ update BaseModel 1234-1234-1234 email "aibnb@mail.com"
+		        """
+
+		def do_count(self, arg):
+		        """Retrieve the number of instances of a class
+		        """
+
+
