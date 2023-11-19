@@ -1,4 +1,6 @@
 -- prepares a MySQL server for the project
+-- Run Command:
+--	cat setup_mysql_dev.sql | mysql -hlocalhost -uroot -p
 
 CREATE DATABASE IF NOT EXISTS ecommerce_db;
 CREATE USER IF NOT EXISTS 'ecommerce_dev'@'localhost' IDENTIFIED BY 'ecommerce_pwd';

@@ -2,10 +2,6 @@
 
 """Program console.py that contains the entry point of the command interpreter
 """
-import cmd
-import re
-import shlex  # for splitting the line along spaces except in double quotes
-
 from models.base_model import BaseModel
 from models import storage
 from models.user import User
@@ -13,8 +9,13 @@ from models.buy import Buy
 from models.cart import Cart
 from models.item import Item
 
+from cmd import Cmd
+import re
+import shlex  # for splitting the line along spaces except in double quotes
 
-class ECommerceCommand(cmd.Cmd):
+
+
+class ECommerceCommand(Cmd):
     """Class ECommerce Command
     """
     prompt = "(ecommerce) "
@@ -80,11 +81,11 @@ class ECommerceCommand(cmd.Cmd):
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
-        elif args[0] not in HBNBCommand.all_models.keys():
+        elif args[0] not in ECommerceCommand.all_models.keys():
             print("** class doesn't exist **")
         else:
             new_dict = self._key_value_parser(args[1:])
-            new_model = HBNBCommand.all_models[args[0]](**newdict)
+            new_model = ECommerceCommand.all_models[args[0]](**new_dict)
             new_model.save()
             print(new_model.id)
 
@@ -96,7 +97,7 @@ class ECommerceCommand(cmd.Cmd):
                 $ show BaseModel 1234-1234-1234
         """
         args = arg.split()
-        all_instances = storage.all()
+        # all_instances = storage.all()
         args_len = len(args)
         instance_id = None
 
@@ -106,14 +107,25 @@ class ECommerceCommand(cmd.Cmd):
 
         if not arg:
             print("** class name missing **")
-        elif args[0] not in HBNBCommand.all_models.keys():
+            return
+        elif args[0] not in ECommerceCommand.all_models.keys():
             print("** class doesn't exist **")
+            return
         elif args_len == 1:
             print("** instance id missing **")
-        elif instance_id not in all_instances.keys():
+            return
+        instance = storage.get(args[0], args[1])
+        if instance.count() == 0:
             print("** no instance found **")
         else:
-            print(all_instances[instance_id])
+            """ print(all_instances[instance_id]) """
+            for row in instance.all():
+                print(row.username)
+                print(row.email)
+                print(row.password)
+                print(row.phone)
+                print(row.address)
+                print(row.is_admin)
 
     def do_destroy(self, arg):
         """Deletes an instance based on the class name
@@ -133,7 +145,7 @@ class ECommerceCommand(cmd.Cmd):
 
         if not arg:
             print("** class name missing **")
-        elif args[0] not in HBNBCommand.all_models.keys():
+        elif args[0] not in ECommerceCommand.all_models.keys():
             print("** class doesn't exist **")
         elif args_len == 1:
             print("** instance id missing **")
@@ -155,7 +167,7 @@ class ECommerceCommand(cmd.Cmd):
         result = []
 
         if arg:
-            if arg in HBNBCommand.all_models.keys():
+            if arg in ECommerceCommand.all_models.keys():
                 for key, val in all_instances.items():
                     if arg == val.__class__.__name__:
                         result.append(str(val))
@@ -210,7 +222,7 @@ class ECommerceCommand(cmd.Cmd):
 
         if not class_name:
             print("** class name missing **")
-        elif class_name not in HBNBCommand.all_models.keys():
+        elif class_name not in ECommerceCommand.all_models.keys():
             print("** class doesn't exist **")
         elif not class_id:
             print("** instance id missing **")
@@ -230,10 +242,14 @@ class ECommerceCommand(cmd.Cmd):
         """Retrieve the number of instances of a class
         """
         if not arg:
+            print(storage.count())
+            return
             print("** class name missing **")
-        elif arg not in HBNBCommand.all_models.keys():
+        elif arg not in ECommerceCommand.all_models.keys():
             print("** class doesn't exist **")
         else:
+            print(storage.count(arg))
+            return
             count = 0
             all_instancess = storage.all()
             for key, val in all_instancess.items():
@@ -292,4 +308,4 @@ class ECommerceCommand(cmd.Cmd):
 
 
 if __name__ == '__main__':
-    HBNBCommand().cmdloop()
+    ECommerceCommand().cmdloop()

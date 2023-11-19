@@ -1,21 +1,19 @@
 #!/usr/vin/python3
 """ DB Storage
 """
-from models import storage
 from models.base_model import BaseModel, Base
 from models.user import User
 from models.buy import Buy
 from models.cart import Cart
 from models.item import Item
-from os import getenv
 import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
 classes = {
-        'User': User
-        'Buy': Buy
-        'Cart': Cart
+        'User': User,
+        'Buy': Buy,
+        'Cart': Cart,
         'Item': Item
         }
 
@@ -26,16 +24,13 @@ class DBStorage:
     __session = None
 
     def __init__(self):
-        MYSQL_USER = "ecommerce_dev"
-        MYSQL_PWD = "ecommerce_pwd"
-        MYSQL_HOST = "localhost"
-        MYSQL_DB = "ecommerce_db"
+        user = "ecommerce_dev"
+        password = "ecommerce_pwd"
+        host = "localhost"
+        db = "ecommerce_db"
 
-        self.__enging = create_engine("mysql+mysqldb://{}:{}@{}/{}".
-                                      format(MYSQL_USER,
-                                             MYSQL_PWD,
-                                             MYSQL_HOST,
-                                             MYSQL_DB))
+        self.__engine = create_engine("mysql+mysqldb://{}:{}@{}/{}".
+                                      format(user, password, host, db))
 
     def all(self, cls=None):
         """Query on the curret database session all objects of the given class.
@@ -43,16 +38,16 @@ class DBStorage:
             Return:
                 Dict of queried classes in the format <class name>.<obj id> = obj.
         """
-        new_dict = {}
+        new_list = []
         if cls is None:
             for clss in classes:
-                new_dict.extend(self.__session.query(clss).all())
+                new_list.extend(self.__session.query(eval(clss)).all())
         else:
             if cls in classes:
-                new_dict = self.__session.query(cls)
+                new_list = self.__session.query(cls)
 
         return ({"{}.{}".
-                format(type(obj).__name__, obj.id): obj for obj in new_dict})
+                format(type(obj).__name__, obj.id): obj for obj in new_list})
 
     def new(self, obj):
         """ add the object to the current database session """
@@ -85,27 +80,26 @@ class DBStorage:
         """ Returns the object based on the class name and its ID, or
             None if not found
         """
-        if cls not in classes.values():
+        cls_list = list(classes.keys())
+        if cls not in cls_list:
             return (None)
 
-        all_cls = storage.all(cls)
-        for value in all_cls.values():
-            if (value.id == id):
-                return (value)
-
-        return (None)
+        clss = classes[cls]
+        obj = self.__session.query(clss).filter(clss.id==id)
+        return (obj)
 
     def count(self, cls=None):
         """
         count the number of objects in storage
         """
-        all_class = classes.values()
+        count = 0
 
         if not cls:
-            count = 0
-            for clas in all_class:
-                count += len(storage.all(clas).values())
+            for clss in classes:
+                obj = self.__session.query(eval(clss)).all()
+                count += len(obj)
         else:
-            count = len(storage.all(cls).values())
+            obj = self.__session.query(classes[cls]).all()
+            count = len(obj)
 
         return (count)
