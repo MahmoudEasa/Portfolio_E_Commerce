@@ -7,7 +7,7 @@ from sqlalchemy import Column, String, Integer
 
 class ItemCount(BaseModel, Base):
     """Item Count Class """
-    __tablename__ = "itemCounts"
+    __tablename__ = "item_counts"
     item_name = Column(String(128), nullable=False)
     item_count = Column(Integer, nullable=False, default=1)
 
