@@ -9,7 +9,7 @@ class Item(BaseModel, Base):
     """Item Class
     """
     __tablename__ = "items"
-    name = Column(String(128), nullable=False)
+    name = Column(String(128), nullable=False, unique=True)
     discription = Column(String(1024), nullable=True)
     color = Column(String(60), nullable=False)
     image = Column(String(128), nullable=True)

@@ -10,8 +10,8 @@ class User(BaseModel, Base):
     """User Class
     """
     __tablename__ = 'users'
-    username = Column(String(128), nullable=False)
-    email = Column(String(128), nullable=False)
+    username = Column(String(128), nullable=False, unique=True)
+    email = Column(String(128), nullable=False, unique=True)
     password = Column(String(128), nullable=False)
     phone = Column(String(20), nullable=False)
     address = Column(String(128), nullable=False)

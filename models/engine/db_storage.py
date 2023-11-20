@@ -43,9 +43,9 @@ class DBStorage:
         new_list = []
         if cls is None:
             for clss in classes:
-                new_list.extend(self.__session.query(eval(clss)).all())
+                new_list.extend(self.__session.query(classes[clss]).all())
         else:
-            if cls in classes:
+            if cls in classes.values():
                 new_list = self.__session.query(cls)
 
         return ({"{}.{}".
@@ -82,12 +82,13 @@ class DBStorage:
         """ Returns the object based on the class name and its ID, or
             None if not found
         """
-        cls_list = list(classes.keys())
+        cls_list = list(classes.values())
         if cls not in cls_list:
             return (None)
 
-        clss = classes[cls]
-        obj = self.__session.query(clss).filter(clss.id==id)
+        obj = self.__session.query(cls).filter(cls.id==id)
+        if not obj:
+            return (None)
         return (obj)
 
     def count(self, cls=None):
