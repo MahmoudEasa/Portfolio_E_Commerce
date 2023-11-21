@@ -52,13 +52,20 @@ class BaseModel:
         models.storage.new(self)
         models.storage.save()
 
-    def to_dict(self):
+    def to_dict(self, save_password=None):
         """Returns a dictionary containing all models
         """
         dict_copy = self.__dict__.copy()
         dict_copy['created_at'] = self.created_at.isoformat()
         dict_copy['updated_at'] = self.updated_at.isoformat()
         dict_copy['__class__'] = self.__class__.__name__
+
+        if '_sa_instance_state' in dict_copy:
+            del dict_copy['_sa_instance_state']
+
+        if save_password is None:
+            if 'password' in dict_copy:
+                del dict_copy['password']
 
         return (dict_copy)
 

@@ -15,38 +15,20 @@ def get_users():
     all_users = storage.all(User).values()
     list_users = []
     for user in all_users:
-        user_o = user.to_dict()
-        user_obj = {"username": user_o['username'],
-                    "email": user_o['email'],
-                    "phone": user_o['phone'],
-                    "address": user_o['address'],
-                    "is_admin": user_o['is_admin'],
-                    "id": user_o['id'],
-                    "created_at": user_o['created_at'],
-                    "updated_at": user_o['updated_at'],
-                    }
-        list_users.append(user_obj)
+        list_users.append(user.to_dict())
+
     return (jsonify(list_users))
 
 
 @app_views.route('/users/<user_id>', methods=['GET'], strict_slashes=False)
 def get_user(user_id):
     """ Retrieves an user """
-    user = storage.get(User, user_id).first().to_dict()
+    user = storage.get(User, user_id).first()
+
     if not user:
         abort(404)
 
-    user_obj = {"username": user['username'],
-                "email": user['email'],
-                "phone": user['phone'],
-                "address": user['address'],
-                "is_admin": user['is_admin'],
-                "id": user['id'],
-                "created_at": user['created_at'],
-                "updated_at": user['updated_at'],
-                }
-
-    return jsonify(user_obj)
+    return jsonify(user.to_dict())
 
 
 @app_views.route('/users/<user_id>', methods=['DELETE'],
@@ -88,21 +70,15 @@ def post_user():
     if 'is_admin' not in request.get_json():
         abort(400, description="Missing is_admin")
 
-    data = request.get_json()
-    instance = User(**data)
-    instance.save()
-    user = instance.to_dict()
-    user_obj = {"username": user['username'],
-                "email": user['email'],
-                "phone": user['phone'],
-                "address": user['address'],
-                "is_admin": user['is_admin'],
-                "id": user['id'],
-                "created_at": user['created_at'],
-                "updated_at": user['updated_at'],
-                }
+    try:
+        data = request.get_json()
+        instance = User(**data)
+        instance.save()
+        user = instance.to_dict()
 
-    return make_response(jsonify(user_obj), 201)
+        return make_response(jsonify(user), 201)
+    except Exception:
+        return make_response(jsonify({'message': 'Something is wrong'}), 400)
 
 
 @app_views.route('/users/<user_id>', methods=['PUT'], strict_slashes=False)
@@ -115,26 +91,19 @@ def put_user(user_id):
     if not user:
         abort(404)
 
-    if not request.get_json():
-        abort(400, description="Not a JSON")
+    try:
+        if not request.get_json():
+            abort(400, description="Not a JSON")
 
-    ignore = ['id', 'created_at', 'updated_at']
+        ignore = ['id', 'created_at', 'updated_at']
 
-    data = request.get_json()
-    for key, value in data.items():
-        if key not in ignore:
-            setattr(user, key, value)
-    storage.save()
-    user = user.to_dict()
-    user_obj = {"username": user['username'],
-                "email": user['email'],
-                "phone": user['phone'],
-                "address": user['address'],
-                "is_admin": user['is_admin'],
-                "id": user['id'],
-                "created_at": user['created_at'],
-                "updated_at": user['updated_at'],
-                }
+        data = request.get_json()
+        for key, value in data.items():
+            if key not in ignore:
+                setattr(user, key, value)
+        storage.save()
+        user = user.to_dict()
 
-
-    return make_response(jsonify(user_obj), 200)
+        return make_response(jsonify(user), 200)
+    except Exception:
+        return make_response(jsonify({'message': 'Something is wrong'}), 400)

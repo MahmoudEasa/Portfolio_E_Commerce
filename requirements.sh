@@ -8,12 +8,20 @@
 # ItemCount (test1) aa2ee222-4820-4eff-8b72-7ac55d625c4d
 
 
+# Run app
+# python3 -m api.v1.app
+
+
 # Update and Upgrade apt-get
 sudo apt-get -y update
 sudo apt-get -y upgrade
 
 
 # Back-End
+# Flask-Login
+sudo pip3 install Flask-Login
+
+
 # cmd
 
 
