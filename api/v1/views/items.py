@@ -54,22 +54,22 @@ def post_item():
     """
     Creates a item
     """
-    if not request.get_json():
+    data = request.get_json()
+    if not data:
         abort(400, description="Not a JSON")
 
-    if 'name' not in request.get_json():
+    if 'name' not in data:
         abort(400, description="Missing name")
-    if 'price' not in request.get_json():
+    if 'price' not in data:
         abort(400, description="Missing price")
-    if 'color' not in request.get_json():
+    if 'color' not in data:
         abort(400, description="Missing color")
-    if 'discription' not in request.get_json():
+    if 'discription' not in data:
         abort(400, description="Missing discription")
-    if 'image' not in request.get_json():
+    if 'image' not in data:
         abort(400, description="Missing image")
 
     try:
-        data = request.get_json()
         instance = Item(**data)
         instance.save()
         item = instance.to_dict()
@@ -90,13 +90,12 @@ def put_item(item_id):
         abort(404)
 
     try:
-
-        if not request.get_json():
+        data = request.get_json()
+        if not data:
             abort(400, description="Not a JSON")
 
         ignore = ['id', 'created_at', 'updated_at']
 
-        data = request.get_json()
         for key, value in data.items():
             if key not in ignore:
                 setattr(item, key, value)

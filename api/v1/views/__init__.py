@@ -10,3 +10,4 @@ from api.v1.views.carts import *
 from api.v1.views.items import *
 from api.v1.views.item_counts import *
 from api.v1.views.users import *
+from api.v1.views.validation import *

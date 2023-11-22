@@ -22,6 +22,21 @@ sudo apt-get -y upgrade
 sudo pip3 install Flask-Login
 
 
+# validators
+sudo pip3 install validators
+
+
+# phonenumbers
+sudo pip3 install phonenumbers
+
+
+# timedelta
+sudo pip3 install timedelta
+
+
+# secrets
+
+
 # cmd
 
 
