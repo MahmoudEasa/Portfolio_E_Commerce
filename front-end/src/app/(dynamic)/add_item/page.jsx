@@ -1,11 +1,11 @@
 import Image from "next/image";
 
-const Home = () => {
+const AddItem = () => {
 	return (
 		<div>
-			<h1>Hello, world</h1>
+			<h1>AddItem</h1>
 		</div>
 	);
 };
 
-export default Home;
+export default AddItem;

@@ -1,30 +1,16 @@
 "use client";
-
+import { useContext } from "react";
+import Image from "next/image";
 import Link from "next/link";
-import { links } from "./data";
 import { Fragment } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { links, linksProfile, adminLinks } from "../../data";
 import Button from "../Button/Button";
-import axios from "axios";
+import { UserContext } from "@/context/UserContext";
 
 const Navbar = () => {
-	function classNames(...classes) {
-		return classes.join(" ");
-	}
-
-	const url = "http://127.0.0.1:5001/api/v1/";
-
-	function logout() {
-		axios
-			.get(`${url}/logout`)
-			.then((res) => {
-				console.log(res.data);
-			})
-			.catch((err) => {
-				console.log(err);
-			});
-	}
+	const { user, login, logout } = useContext(UserContext);
 
 	return (
 		<Disclosure as="nav" className="bg-gray-800">
@@ -65,9 +51,10 @@ const Navbar = () => {
 							>
 								<div className="flex flex-shrink-0 items-center">
 									<Link href={"/"}>
-										<img
-											className="h-8 w-auto"
-											src="/logo2.png"
+										<Image
+											width={150}
+											height={150}
+											src="/images/logo2.png"
 											alt="Your Company"
 										/>
 									</Link>
@@ -78,17 +65,8 @@ const Navbar = () => {
 											<Link
 												key={link.id}
 												href={link.url}
-												className={classNames(
-													link.current
-														? "bg-gray-900 text-white"
-														: "text-gray-300 hover:bg-gray-700 hover:text-white",
-													"rounded-md px-3 py-2 text-sm font-medium"
-												)}
-												aria-current={
-													link.current
-														? "page"
-														: undefined
-												}
+												className="text-gray-300 hover:bg-gray-700 hover:text-white
+															rounded-md px-3 py-2 text-sm font-medium"
 											>
 												{link.title}
 											</Link>
@@ -105,9 +83,11 @@ const Navbar = () => {
 											<span className="sr-only">
 												Open user menu
 											</span>
-											<img
-												className="h-8 w-8 rounded-full"
-												src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+											<Image
+												width={35}
+												height={35}
+												className="rounded-full"
+												src="/images/profiles/user_default.png"
 												alt=""
 											/>
 										</Menu.Button>
@@ -122,45 +102,80 @@ const Navbar = () => {
 										leaveTo="transform opacity-0 scale-95"
 									>
 										<Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-											<Menu.Item>
-												{({ active }) => (
-													<Link
-														href="/profile"
-														className={classNames(
-															active
-																? "bg-gray-100"
-																: "",
-															"block px-4 py-2 text-sm text-gray-700"
-														)}
-													>
-														Your Profile
-													</Link>
-												)}
-											</Menu.Item>
-											<Menu.Item>
-												{({ active }) => (
-													<Link
-														href="/order"
-														className={classNames(
-															active
-																? "bg-gray-100"
-																: "",
-															"block px-4 py-2 text-sm text-gray-700"
-														)}
-													>
-														Your Orders
-													</Link>
-												)}
-											</Menu.Item>
-											<Menu.Item>
-												{({ active }) => (
-													<Button
-														func={logout}
-														name={"Sign out"}
-														class={"block px-4 py-2 text-sm text-gray-700"}
-													/>
-												)}
-											</Menu.Item>
+											{user ? (
+												<>
+													{linksProfile.map(
+														(link) => (
+															<Menu.Item
+																key={link.id}
+															>
+																<Link
+																	href={
+																		link.url
+																	}
+																	className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200"
+																>
+																	{link.title}
+																</Link>
+															</Menu.Item>
+														)
+													)}
+													{user.is_admin ? (
+														<>
+															{adminLinks.map(
+																(link) => (
+																	<Menu.Item
+																		key={
+																			link.id
+																		}
+																	>
+																		<Link
+																			href={
+																				link.url
+																			}
+																			className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200"
+																		>
+																			{
+																				link.title
+																			}
+																		</Link>
+																	</Menu.Item>
+																)
+															)}
+														</>
+													) : (
+														""
+													)}
+													<Menu.Item>
+														<Button
+															func={logout}
+															name={"Sign out"}
+															class={
+																"block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 w-full text-start"
+															}
+														/>
+													</Menu.Item>
+												</>
+											) : (
+												<>
+													<Menu.Item>
+														<Link
+															href={"/login"}
+															className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200"
+														>
+															Login
+														</Link>
+													</Menu.Item>
+													<Menu.Item>
+														<Link
+															href={"/signin"}
+															className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200"
+														>
+															Sign in
+														</Link>
+													</Menu.Item>
+												</>
+											)}
 										</Menu.Items>
 									</Transition>
 								</Menu>
@@ -174,15 +189,8 @@ const Navbar = () => {
 								<Link
 									key={link.id}
 									href={link.url}
-									className={classNames(
-										link.current
-											? "bg-gray-900 text-white"
-											: "text-gray-300 hover:bg-gray-700 hover:text-white",
-										"block rounded-md px-3 py-2 text-base font-medium"
-									)}
-									aria-current={
-										link.current ? "page" : undefined
-									}
+									className="text-gray-300 hover:bg-gray-700 hover:text-white
+												block rounded-md px-3 py-2 text-base font-medium"
 								>
 									<Disclosure.Button>
 										{link.title}
