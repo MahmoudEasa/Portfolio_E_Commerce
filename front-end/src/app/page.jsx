@@ -3,7 +3,7 @@ import Image from "next/image";
 const Home = () => {
 	return (
 		<div>
-			<h1>Hello, world</h1>
+			<h1>Landing Page</h1>
 		</div>
 	);
 };

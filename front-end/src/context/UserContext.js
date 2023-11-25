@@ -3,26 +3,43 @@
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
 import { url } from "@/data";
+import { useRouter } from "next/navigation";
 
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
 	const [user, setUser] = useState("");
+	const [errors, setErrors] = useState("");
+	const router = useRouter();
 
-	const login = () => {
-		const data = {
-			email: "mu01011422865@gmail.com",
-			password: "123456",
-		};
+	const login = (userData) => {
+		setErrors("");
 
 		axios
-			.post(`${url}/login`, data)
+			.post(`${url}/login`, userData)
 			.then((res) => {
 				console.log(res.data);
 				localStorage.setItem("user", JSON.stringify(res.data));
 				setUser(res.data);
+				router.push("/");
 			})
 			.catch((err) => {
+				setErrors(err.response.data.message);
+				console.log(err);
+			});
+	};
+
+	const singin = (userData) => {
+		setErrors("");
+
+		axios
+			.post(`${url}/users`, userData)
+			.then((res) => {
+				console.log(res.data);
+				router.push("/login");
+			})
+			.catch((err) => {
+				setErrors(err.response.data.message);
 				console.log(err);
 			});
 	};
@@ -46,7 +63,7 @@ export const UserProvider = ({ children }) => {
 	}, []);
 
 	return (
-		<UserContext.Provider value={{ user, login, logout }}>
+		<UserContext.Provider value={{ user, login, logout, singin, errors }}>
 			{children}
 		</UserContext.Provider>
 	);

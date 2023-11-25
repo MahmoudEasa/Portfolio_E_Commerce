@@ -3,6 +3,8 @@ import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import { UserProvider } from "@/context/UserContext";
+import { CartProvider } from "@/context/CartContext";
+import Cart from "@/components/Cart/Cart";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,9 +18,14 @@ export default function RootLayout({ children }) {
 		<html lang="en">
 			<body className={inter.className}>
 				<UserProvider>
-					<Navbar />
-					<main className="container mx-auto">{children}</main>
-					<Footer />
+					<CartProvider>
+						<Navbar />
+						<Cart />
+						<main className="container mx-auto min-h-min">
+							{children}
+						</main>
+						<Footer />
+					</CartProvider>
 				</UserProvider>
 			</body>
 		</html>
