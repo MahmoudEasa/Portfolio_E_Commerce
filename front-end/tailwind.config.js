@@ -14,6 +14,9 @@ module.exports = {
 			min: "80vh",
 		},
 		extend: {
+			gridTemplateRows: {
+				"[auto,auto,1fr]": "auto auto 1fr",
+			},
 			backgroundImage: {
 				"gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
 				"gradient-conic":

@@ -7,7 +7,7 @@ export const links = [
 	{
 		id: 2,
 		title: "Products",
-		url: "/products",
+		url: "/items",
 	},
 	{
 		id: 3,

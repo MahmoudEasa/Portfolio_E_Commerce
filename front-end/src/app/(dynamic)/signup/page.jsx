@@ -40,7 +40,7 @@ const SingIn = () => {
 						className="mt-10 text-center text-2xl font-bold leading-9
 									tracking-tight text-gray-300"
 					>
-						Sign in to your account
+						Sign Up
 					</h2>
 					{errors ? (
 						<h3
@@ -228,7 +228,7 @@ const SingIn = () => {
 											focus-visible:outline-2 focus-visible:outline-offset-2
 											focus-visible:outline-indigo-600"
 							>
-								Sign In
+								Sign Up
 							</button>
 						</div>
 					</form>

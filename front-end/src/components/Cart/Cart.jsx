@@ -1,13 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import { Fragment, useState, useContext } from "react";
+import { Fragment, useContext } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { CartContext } from "@/context/CartContext";
+import Link from "next/link";
 
 const Cart = () => {
 	const { cart, open, removeFromCart, toggleOpen } = useContext(CartContext);
+	const cartLen = cart.length;
 
 	return (
 		<Transition.Root show={open} as={Fragment}>
@@ -69,73 +71,100 @@ const Cart = () => {
 														role="list"
 														className="-my-6 divide-y divide-gray-200"
 													>
-														{cart.map((product) => (
-															<li
-																key={product.id}
-																className="flex py-6"
-															>
-																<div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-																	<img
-																		src={
-																			product.image
+														{cartLen > 0 ? (
+															cart.map(
+																(product) => (
+																	<li
+																		key={
+																			product.cart_id
 																		}
-																		alt={
-																			product.name
-																		}
-																		className="h-full w-full object-cover object-center"
-																	/>
-																</div>
+																		className="flex py-6"
+																	>
+																		<div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+																			<img
+																				src={
+																					product
+																						.item
+																						.image
+																				}
+																				alt={
+																					product
+																						.item
+																						.name
+																				}
+																				className="h-full w-full object-cover object-center"
+																			/>
+																		</div>
 
-																<div className="ml-4 flex flex-1 flex-col">
-																	<div>
-																		<div className="flex justify-between text-base font-medium text-gray-900">
-																			<h3>
-																				<a
-																					href={`/items/${product.id}`}
-																				>
+																		<div className="ml-4 flex flex-1 flex-col">
+																			<div>
+																				<div className="flex justify-between text-base font-medium text-gray-900">
+																					<h3>
+																						<Link
+																							href={`/items/${product.item.id}`}
+																						>
+																							{
+																								product
+																									.item
+																									.name
+																							}
+																						</Link>
+																					</h3>
+																					<p className="ml-4">
+																						$
+																						{
+																							product
+																								.item
+																								.price
+																						}
+																					</p>
+																				</div>
+																				<p className="mt-1 text-sm text-gray-500">
 																					{
-																						product.name
+																						product
+																							.item
+																							.color
 																					}
-																				</a>
-																			</h3>
-																			<p className="ml-4">
-																				{
-																					product.price
-																				}
-																			</p>
-																		</div>
-																		<p className="mt-1 text-sm text-gray-500">
-																			{
-																				product.color
-																			}
-																		</p>
-																	</div>
-																	<div className="flex flex-1 items-end justify-between text-sm">
-																		<p className="text-gray-500">
-																			Qty
-																			{
-																				" 1 "
-																			}
-																			{}
-																		</p>
+																				</p>
+																			</div>
+																			<div className="flex flex-1 items-end justify-between text-sm">
+																				<p className="text-gray-500">
+																					Qty
+																					{
+																						" 1 "
+																					}
+																					{}
+																				</p>
 
-																		<div className="flex">
-																			<button
-																				onClick={() =>
-																					removeFromCart(
-																						product.id
-																					)
-																				}
-																				type="button"
-																				className="font-medium text-indigo-600 hover:text-indigo-500"
-																			>
-																				Remove
-																			</button>
+																				<div className="flex">
+																					<button
+																						onClick={() =>
+																							removeFromCart(
+																								product
+																									.item
+																									.id,
+																								product.cart_id
+																							)
+																						}
+																						type="button"
+																						className="font-medium text-indigo-600 hover:text-indigo-500"
+																					>
+																						Remove
+																					</button>
+																				</div>
+																			</div>
 																		</div>
-																	</div>
-																</div>
+																	</li>
+																)
+															)
+														) : (
+															<li className="py-6 text-center text-gray-900">
+																<h3>
+																	Your cart is
+																	empty
+																</h3>
 															</li>
-														))}
+														)}
 													</ul>
 												</div>
 											</div>
@@ -151,12 +180,12 @@ const Cart = () => {
 												checkout.
 											</p>
 											<div className="mt-6">
-												<a
+												<Link
 													href="#"
 													className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
 												>
 													Checkout
-												</a>
+												</Link>
 											</div>
 											<div className="mt-6 flex justify-center gap-5 text-center text-sm text-gray-500">
 												<p>or</p>

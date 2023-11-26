@@ -162,7 +162,7 @@ const Navbar = () => {
 													<Menu.Item>
 														<Button
 															func={logout}
-															name={"Sign out"}
+															name={"Sign Out"}
 															class={
 																"block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 w-full text-start"
 															}
@@ -181,10 +181,10 @@ const Navbar = () => {
 													</Menu.Item>
 													<Menu.Item>
 														<Link
-															href={"/signin"}
+															href={"/signup"}
 															className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200"
 														>
-															Sign in
+															Sign Up
 														</Link>
 													</Menu.Item>
 												</>
