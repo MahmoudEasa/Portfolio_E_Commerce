@@ -5,14 +5,21 @@ import { useContext, useState } from "react";
 import { UserContext } from "@/context/UserContext";
 import { useRouter } from "next/navigation";
 
-const Login = () => {
-	const { user, login, errors } = useContext(UserContext);
-	const [formData, setFormData] = useState({ email: "", password: "" });
+const SingIn = () => {
+	const { user, singin, errors } = useContext(UserContext);
+	const [formData, setFormData] = useState({
+		address: "",
+		email: "",
+		is_admin: false,
+		phone: "",
+		username: "",
+		password: "",
+	});
 	const router = useRouter();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		login(formData);
+		singin(formData);
 	};
 
 	if (user) router.push("/");
@@ -33,7 +40,7 @@ const Login = () => {
 						className="mt-10 text-center text-2xl font-bold leading-9
 									tracking-tight text-gray-300"
 					>
-						Login to your account
+						Sign Up
 					</h2>
 					{errors ? (
 						<h3
@@ -49,13 +56,46 @@ const Login = () => {
 
 				<div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
 					<form className="space-y-6" onSubmit={handleSubmit}>
+						{/* User Name */}
+						<div>
+							<label
+								htmlFor="username"
+								className="block text-sm font-medium leading-6
+											text-gray-300"
+							>
+								User Name
+							</label>
+							<div className="mt-2">
+								<input
+									id="username"
+									name="username"
+									type="username"
+									autoComplete="username"
+									required
+									value={formData.username}
+									onChange={(e) =>
+										setFormData({
+											...formData,
+											username: e.target.value,
+										})
+									}
+									className="block w-full rounded-md border-0 py-1.5
+											text-gray-900 shadow-sm ring-1 ring-inset
+											ring-gray-300 placeholder:text-gray-300
+											focus:ring-2 focus:ring-inset px-2
+											focus:ring-indigo-600 sm:text-sm sm:leading-6"
+								/>
+							</div>
+						</div>
+
+						{/* Email Address */}
 						<div>
 							<label
 								htmlFor="email"
 								className="block text-sm font-medium leading-6
 											text-gray-300"
 							>
-								Email address
+								Email Address
 							</label>
 							<div className="mt-2">
 								<input
@@ -80,6 +120,7 @@ const Login = () => {
 							</div>
 						</div>
 
+						{/* Password */}
 						<div>
 							<div className="flex items-center justify-between">
 								<label
@@ -89,15 +130,6 @@ const Login = () => {
 								>
 									Password
 								</label>
-								<div className="text-sm">
-									<a
-										href="#"
-										className="font-semibold text-indigo-600
-												hover:text-indigo-500"
-									>
-										Forgot password?
-									</a>
-								</div>
 							</div>
 							<div className="mt-2">
 								<input
@@ -122,6 +154,70 @@ const Login = () => {
 							</div>
 						</div>
 
+						{/* Address */}
+						<div>
+							<label
+								htmlFor="address"
+								className="block text-sm font-medium leading-6
+											text-gray-300"
+							>
+								Address
+							</label>
+							<div className="mt-2">
+								<input
+									id="address"
+									name="address"
+									type="address"
+									autoComplete="address"
+									required
+									value={formData.address}
+									onChange={(e) =>
+										setFormData({
+											...formData,
+											address: e.target.value,
+										})
+									}
+									className="block w-full rounded-md border-0 py-1.5
+											text-gray-900 shadow-sm ring-1 ring-inset
+											ring-gray-300 placeholder:text-gray-300
+											focus:ring-2 focus:ring-inset px-2
+											focus:ring-indigo-600 sm:text-sm sm:leading-6"
+								/>
+							</div>
+						</div>
+
+						{/* Phone Number */}
+						<div>
+							<label
+								htmlFor="phone"
+								className="block text-sm font-medium leading-6
+											text-gray-300"
+							>
+								Phone Number
+							</label>
+							<div className="mt-2">
+								<input
+									id="phone"
+									name="phone"
+									type="phone"
+									autoComplete="phone"
+									required
+									value={formData.phone}
+									onChange={(e) =>
+										setFormData({
+											...formData,
+											phone: e.target.value,
+										})
+									}
+									className="block w-full rounded-md border-0 py-1.5
+											text-gray-900 shadow-sm ring-1 ring-inset
+											ring-gray-300 placeholder:text-gray-300
+											focus:ring-2 focus:ring-inset px-2
+											focus:ring-indigo-600 sm:text-sm sm:leading-6"
+								/>
+							</div>
+						</div>
+
 						<div>
 							<button
 								type="submit"
@@ -132,18 +228,18 @@ const Login = () => {
 											focus-visible:outline-2 focus-visible:outline-offset-2
 											focus-visible:outline-indigo-600"
 							>
-								Login
+								Sign Up
 							</button>
 						</div>
 					</form>
 
 					<p className="mt-10 text-center text-sm text-gray-500">
-						Not a member?{" "}
+						You have an account?{" "}
 						<Link
-							href={"/signup"}
+							href={"/login"}
 							className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
 						>
-							Sign Up
+							Login
 						</Link>
 					</p>
 				</div>
@@ -152,4 +248,4 @@ const Login = () => {
 	);
 };
 
-export default Login;
+export default SingIn;

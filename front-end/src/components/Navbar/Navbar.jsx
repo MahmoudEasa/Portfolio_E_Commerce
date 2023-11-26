@@ -1,19 +1,23 @@
 "use client";
-import { useContext } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { links, linksProfile, adminLinks } from "../../data";
 import Button from "../Button/Button";
 import { UserContext } from "@/context/UserContext";
+import { CartContext } from "@/context/CartContext";
 
 const Navbar = () => {
-	const { user, login, logout } = useContext(UserContext);
+	const { user, logout } = useContext(UserContext);
+	const { toggleOpen } = useContext(CartContext);
 
 	return (
-		<Disclosure as="nav" className="bg-gray-800">
+		<Disclosure
+			as="nav"
+			className="bg-gray-800 z-40 sticky top-0 left-0 w-full"
+		>
 			{({ open }) => (
 				<>
 					<div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
@@ -74,8 +78,17 @@ const Navbar = () => {
 									</div>
 								</div>
 							</div>
-							<div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+							<div
+								className="absolute inset-y-0 right-0 flex
+											items-center pr-2 sm:static sm:inset-auto
+											sm:ml-6 sm:pr-0"
+							>
 								{/* Profile dropdown */}
+								<Button
+									className="text-sm focus:outline-none"
+									func={toggleOpen}
+									name={"Cart"}
+								/>
 								<Menu as="div" className="relative ml-3">
 									<div>
 										<Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
@@ -149,7 +162,7 @@ const Navbar = () => {
 													<Menu.Item>
 														<Button
 															func={logout}
-															name={"Sign out"}
+															name={"Sign Out"}
 															class={
 																"block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200 w-full text-start"
 															}
@@ -168,10 +181,10 @@ const Navbar = () => {
 													</Menu.Item>
 													<Menu.Item>
 														<Link
-															href={"/signin"}
+															href={"/signup"}
 															className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200"
 														>
-															Sign in
+															Sign Up
 														</Link>
 													</Menu.Item>
 												</>
