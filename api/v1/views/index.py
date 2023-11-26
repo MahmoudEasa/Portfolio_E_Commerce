@@ -55,4 +55,4 @@ def me():
     user = session.get('user')
     if user is not None:
         return (jsonify(user))
-    abort(404)
+    return (make_response(jsonify({'message': 'Not Found'}), 404))
