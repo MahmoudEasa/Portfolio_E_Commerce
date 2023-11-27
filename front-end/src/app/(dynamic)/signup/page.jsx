@@ -5,8 +5,9 @@ import { useContext, useState } from "react";
 import { UserContext } from "@/context/UserContext";
 import { useRouter } from "next/navigation";
 
-const SingIn = () => {
-	const { user, singin, errors } = useContext(UserContext);
+const SingUp = () => {
+	const router = useRouter();
+	const { user, signup, errors } = useContext(UserContext);
 	const [formData, setFormData] = useState({
 		address: "",
 		email: "",
@@ -15,11 +16,10 @@ const SingIn = () => {
 		username: "",
 		password: "",
 	});
-	const router = useRouter();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		singin(formData);
+		signup(formData);
 	};
 
 	if (user) router.push("/");
@@ -69,7 +69,7 @@ const SingIn = () => {
 								<input
 									id="username"
 									name="username"
-									type="username"
+									type="text"
 									autoComplete="username"
 									required
 									value={formData.username}
@@ -248,4 +248,4 @@ const SingIn = () => {
 	);
 };
 
-export default SingIn;
+export default SingUp;

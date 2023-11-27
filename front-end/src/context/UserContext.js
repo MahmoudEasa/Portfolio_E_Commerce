@@ -18,39 +18,46 @@ export const UserProvider = ({ children }) => {
 
 		axios
 			.post(`${url}/login`, userData)
-			.then((res) => {
-				console.log(res.data);
+			.then(async (res) => {
 				localStorage.setItem("user", JSON.stringify(res.data));
 				setUser(res.data);
 				const carts = JSON.parse(localStorage.getItem("cart"));
 				if (carts) {
-					carts.map((cart) => {
-						const data = {
-							user_id: user.id,
-							item_id: cart.id,
-						};
+					try {
+						const promises = carts.map(async (cart) => {
+							const data = {
+								user_id: res.data.id,
+								item_id: cart.item.id,
+							};
+							const response = await axios.post(
+								`${url}/carts`,
+								data
+							);
+							return response.data;
+						});
 
-						axios
-							.post(`${url}/carts`, data)
-							.then((res) => console.log(res.data))
-							.catch((err) => {
-								toast.error("Something is wrong");
-								console.log(err);
-							});
-					});
+						const results = await Promise.all(promises);
+						console.log(results);
+					} catch (error) {
+						toast.error("Something is wrong");
+						console.log(error);
+					}
 				}
 
 				toast.success(`Login Successful ${res.data.username}`);
 				router.back();
 			})
 			.catch((err) => {
-				toast.error(err.response.data.message);
-				setErrors(err.response.data.message);
+				if (err.response.data) {
+					toast.error(err.response.data.message);
+					setErrors(err.response.data.message);
+				} else toast.error("Something is wrong");
+
 				console.log(err);
 			});
 	};
 
-	const singin = (userData) => {
+	const signup = (userData) => {
 		setErrors("");
 
 		axios
@@ -75,10 +82,26 @@ export const UserProvider = ({ children }) => {
 				localStorage.removeItem("user");
 				setUser("");
 				toast.success(`Logout Successful`);
-				router.push("/", { forceRefresh: true });
+				location.reload();
 			})
 			.catch((err) => {
 				toast.error("Something is wrong");
+				console.log(err);
+			});
+	};
+
+	const updateUser = (obj) => {
+		axios
+			.put(`${url}/users/${user.id}`, obj)
+			.then((res) => {
+				localStorage.setItem("user", JSON.stringify(res.data));
+				setUser(res.data);
+				console.log(res.data);
+				toast.success("The data has been updated successfully");
+			})
+			.catch((err) => {
+				toast.error(err.response.data.message);
+				setErrors(err.response.data.message);
 				console.log(err);
 			});
 	};
@@ -89,7 +112,9 @@ export const UserProvider = ({ children }) => {
 	}, []);
 
 	return (
-		<UserContext.Provider value={{ user, login, logout, singin, errors }}>
+		<UserContext.Provider
+			value={{ user, login, logout, signup, errors, updateUser }}
+		>
 			{children}
 		</UserContext.Provider>
 	);

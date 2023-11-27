@@ -1,11 +1,7 @@
-import Image from "next/image";
+import AddItemComponent from "@/components/AddItemComponent/AddItemComponent";
 
 const AddItem = () => {
-	return (
-		<div>
-			<h1>AddItem</h1>
-		</div>
-	);
+	return <AddItemComponent method={"addItem"} />;
 };
 
 export default AddItem;
