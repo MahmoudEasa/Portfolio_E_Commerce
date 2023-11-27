@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Server 355534-web-01
+
+ssh ubuntu@54.160.79.52
