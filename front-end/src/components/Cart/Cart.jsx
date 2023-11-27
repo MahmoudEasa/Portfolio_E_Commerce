@@ -8,8 +8,14 @@ import { CartContext } from "@/context/CartContext";
 import Link from "next/link";
 
 const Cart = () => {
-	const { cart, open, removeFromCart, toggleOpen } = useContext(CartContext);
-	const cartLen = cart.length;
+	const { cart, open, removeFromCart, checkout, toggleOpen, loading } =
+		useContext(CartContext);
+	let cartLen = 0;
+	let subTotal = 0;
+
+	if (cart) cartLen = cart.length;
+
+	if (cartLen > 0) cart.map((c) => (subTotal += c.item.price));
 
 	return (
 		<Transition.Root show={open} as={Fragment}>
@@ -66,126 +72,140 @@ const Cart = () => {
 											</div>
 
 											<div className="mt-8">
-												<div className="flow-root">
-													<ul
-														role="list"
-														className="-my-6 divide-y divide-gray-200"
-													>
-														{cartLen > 0 ? (
-															cart.map(
-																(product) => (
-																	<li
-																		key={
-																			product.cart_id
-																		}
-																		className="flex py-6"
-																	>
-																		<div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-																			<img
-																				src={
-																					product
-																						.item
-																						.image
-																				}
-																				alt={
-																					product
-																						.item
-																						.name
-																				}
-																				className="h-full w-full object-cover object-center"
-																			/>
-																		</div>
+												{loading ? (
+													<div className="flow-root py-6 text-center text-gray-900">
+														Loading...
+													</div>
+												) : (
+													<div className="flow-root">
+														<ul
+															role="list"
+															className="-my-6 divide-y divide-gray-200"
+														>
+															{cartLen > 0 ? (
+																cart.map(
+																	(
+																		product
+																	) => (
+																		<li
+																			key={
+																				product.cart_id
+																			}
+																			className="flex py-6"
+																		>
+																			<div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
+																				<img
+																					src={
+																						product
+																							.item
+																							.image
+																					}
+																					alt={
+																						product
+																							.item
+																							.name
+																					}
+																					className="h-full w-full object-cover object-center"
+																				/>
+																			</div>
 
-																		<div className="ml-4 flex flex-1 flex-col">
-																			<div>
-																				<div className="flex justify-between text-base font-medium text-gray-900">
-																					<h3>
-																						<Link
-																							href={`/items/${product.item.id}`}
-																						>
+																			<div className="ml-4 flex flex-1 flex-col">
+																				<div>
+																					<div className="flex justify-between text-base font-medium text-gray-900">
+																						<h3>
+																							<Link
+																								href={`/items/${product.item.id}`}
+																							>
+																								{
+																									product
+																										.item
+																										.name
+																								}
+																							</Link>
+																						</h3>
+																						<p className="ml-4">
+																							$
 																							{
 																								product
 																									.item
-																									.name
+																									.price
 																							}
-																						</Link>
-																					</h3>
-																					<p className="ml-4">
-																						$
+																						</p>
+																					</div>
+																					<p className="mt-1 text-sm text-gray-500">
 																						{
 																							product
 																								.item
-																								.price
+																								.color
 																						}
 																					</p>
 																				</div>
-																				<p className="mt-1 text-sm text-gray-500">
-																					{
-																						product
-																							.item
-																							.color
-																					}
-																				</p>
-																			</div>
-																			<div className="flex flex-1 items-end justify-between text-sm">
-																				<p className="text-gray-500">
-																					Qty
-																					{
-																						" 1 "
-																					}
-																					{}
-																				</p>
-
-																				<div className="flex">
-																					<button
-																						onClick={() =>
-																							removeFromCart(
-																								product
-																									.item
-																									.id,
-																								product.cart_id
-																							)
+																				<div className="flex flex-1 items-end justify-between text-sm">
+																					<p className="text-gray-500">
+																						Qty
+																						{
+																							" 1 "
 																						}
-																						type="button"
-																						className="font-medium text-indigo-600 hover:text-indigo-500"
-																					>
-																						Remove
-																					</button>
+																						{}
+																					</p>
+
+																					<div className="flex">
+																						<button
+																							onClick={() =>
+																								removeFromCart(
+																									product
+																										.item
+																										.id,
+																									product.cart_id
+																								)
+																							}
+																							type="button"
+																							className="font-medium text-indigo-600 hover:text-indigo-500"
+																						>
+																							Remove
+																						</button>
+																					</div>
 																				</div>
 																			</div>
-																		</div>
-																	</li>
+																		</li>
+																	)
 																)
-															)
-														) : (
-															<li className="py-6 text-center text-gray-900">
-																<h3>
-																	Your cart is
-																	empty
-																</h3>
-															</li>
-														)}
-													</ul>
-												</div>
+															) : (
+																<li className="py-6 text-center text-gray-900">
+																	<h3>
+																		Your
+																		cart is
+																		empty
+																	</h3>
+																</li>
+															)}
+														</ul>
+													</div>
+												)}
 											</div>
 										</div>
 
 										<div className="border-t border-gray-200 px-4 py-6 sm:px-6">
 											<div className="flex justify-between text-base font-medium text-gray-900">
 												<p>Subtotal</p>
-												<p>$262.00</p>
+												<p>${subTotal}</p>
 											</div>
 											<p className="mt-0.5 text-sm text-gray-500">
 												Shipping and taxes calculated at
 												checkout.
 											</p>
 											<div className="mt-6">
-												<Link
-													href="#"
-													className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+												<button
+													onClick={() =>
+														checkout(cart)
+													}
+													className="block text-center w-full rounded-md border
+																border-transparent bg-indigo-600 px-6
+																py-3 text-base font-medium text-white
+																shadow-sm hover:bg-indigo-700"
 												>
 													Checkout
-												</Link>
+												</button>
 											</div>
 											<div className="mt-6 flex justify-center gap-5 text-center text-sm text-gray-500">
 												<p>or</p>

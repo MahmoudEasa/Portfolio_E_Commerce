@@ -6,6 +6,7 @@ import { StarIcon } from "@heroicons/react/20/solid";
 import { RadioGroup } from "@headlessui/react";
 import { ItemContext } from "@/context/ItemContext";
 import { CartContext } from "@/context/CartContext";
+import { UserContext } from "@/context/UserContext";
 import Link from "next/link";
 
 const product = {
@@ -65,6 +66,7 @@ function classNames(...classes) {
 const Item = ({ params }) => {
 	const { addToCart } = useContext(CartContext);
 	const { allItems } = useContext(ItemContext);
+	const { user } = useContext(UserContext);
 	const [selectedColor, setSelectedColor] = useState(product.colors[0]);
 	const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
 	let item = allItems.find((i) => i.id == params.item);
@@ -282,6 +284,14 @@ const Item = ({ params }) => {
 							>
 								Add to Cart
 							</button>
+							{user && user.is_admin && (
+								<Link
+									href={`/add_item/${item.id}`}
+									className="mt-5 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+								>
+									Update Item
+								</Link>
+							)}
 						</form>
 					</div>
 

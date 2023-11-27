@@ -15,7 +15,7 @@ export const ItemProvider = ({ children }) => {
 	const addItem = (item) => {
 		const data = {
 			color: item.color,
-			discription: item.description,
+			discription: item.discription,
 			image: item.image,
 			name: item.name,
 			price: item.price,
@@ -26,9 +26,32 @@ export const ItemProvider = ({ children }) => {
 			.then((res) => {
 				console.log(res.data);
 				setAllItems((prev) => {
-					prev.concat(item);
+					[...prev, item];
 				});
 				toast.success(`Product Added Successfully`);
+			})
+			.catch((err) => {
+				toast.error("Something is wrong");
+				console.log(err);
+			});
+	};
+
+	const updateItem = (id, itemData) => {
+		axios
+			.put(`${url}/items/${id}`, itemData)
+			.then((res) => {
+				console.log(res.data);
+
+				const updatedAllItems = allItems.map((item) => {
+					if (item.id == id) {
+						return { ...item, ...itemData };
+					}
+
+					return item;
+				});
+
+				setAllItems(updatedAllItems);
+				toast.success("The data has been updated successfully");
 			})
 			.catch((err) => {
 				toast.error("Something is wrong");
@@ -41,7 +64,7 @@ export const ItemProvider = ({ children }) => {
 			.delete(`${url}/items/${id}`)
 			.then((res) => {
 				console.log(res.data);
-				const itemsFilter = items.filter((i) => i.id != id);
+				const itemsFilter = allItems.filter((i) => i.id != id);
 				setAllItems(itemsFilter);
 				toast.success(`Product Deleted`);
 			})
@@ -56,7 +79,9 @@ export const ItemProvider = ({ children }) => {
 	}, [items]);
 
 	return (
-		<ItemContext.Provider value={{ allItems, addItem, removeItem }}>
+		<ItemContext.Provider
+			value={{ allItems, addItem, updateItem, removeItem }}
+		>
 			{children}
 		</ItemContext.Provider>
 	);
