@@ -44,7 +44,7 @@ const Items = () => {
 												lg:h-full lg:w-full"
 											/>
 										</div>
-										<div className="my-4 flex h-1/5 justify-between">
+										<div className="my-4 flex h-fit justify-between">
 											<div className="">
 												<h3 className="text-sm text-gray-400">
 													<Link
@@ -76,7 +76,7 @@ const Items = () => {
 														onClick={() =>
 															addToCart(product)
 														}
-														className="absolute block"
+														className="absolute top-6 right-0 block"
 													>
 														<img
 															src="/images/icons/add-to-cart.png"
@@ -87,31 +87,31 @@ const Items = () => {
 												</p>
 											</div>
 										</div>
+										{user && user.is_admin && (
+											<p className="flex flex-col gap-3">
+												<button
+													onClick={() =>
+														removeItem(product.id)
+													}
+													className="text-center w-full
+												rounded-md border border-transparent bg-indigo-600
+												px-6 py-2 text-base font-sm text-white shadow-sm
+												hover:bg-indigo-700"
+												>
+													Remove Item
+												</button>
+												<Link
+													href={`/add_item/${product.id}`}
+													className="text-center w-full
+												rounded-md border border-transparent bg-indigo-600
+												px-6 py-2 text-base font-sm text-white shadow-sm
+												hover:bg-indigo-700"
+												>
+													Update Item
+												</Link>
+											</p>
+										)}
 									</div>
-									{user && user.is_admin && (
-										<p className="flex flex-col gap-3">
-											<button
-												onClick={() =>
-													removeItem(product.id)
-												}
-												className="text-center w-full
-												rounded-md border border-transparent bg-indigo-600
-												px-6 py-2 text-base font-sm text-white shadow-sm
-												hover:bg-indigo-700"
-											>
-												Remove Item
-											</button>
-											<Link
-												href={`/add_item/${product.id}`}
-												className="text-center w-full
-												rounded-md border border-transparent bg-indigo-600
-												px-6 py-2 text-base font-sm text-white shadow-sm
-												hover:bg-indigo-700"
-											>
-												Update Item
-											</Link>
-										</p>
-									)}
 								</div>
 							))
 						) : (
