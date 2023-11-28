@@ -40,8 +40,10 @@ const Items = () => {
 											className="aspect-h-1 aspect-w-1 w-full h-[400px] overflow-hidden
 											rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75"
 										>
-											<img
+											<Image
 												src={product.image}
+												width={100}
+												height={100}
 												alt={product.name}
 												className="h-full w-full object-cover object-center
 												lg:h-full lg:w-full"
@@ -81,10 +83,12 @@ const Items = () => {
 														}
 														className="absolute top-6 right-0 block"
 													>
-														<img
+														<Image
+															width={32}
+															height={32}
 															src="/images/icons/add-to-cart.png"
 															alt="Add to cart"
-															className="h-8 hover:opacity-80"
+															className="h-8 w-8 hover:opacity-80"
 														/>
 													</button>
 												</p>

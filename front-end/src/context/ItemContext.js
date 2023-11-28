@@ -24,7 +24,6 @@ export const ItemProvider = ({ children }) => {
 		axios
 			.post(`${url}/items`, data)
 			.then((res) => {
-				console.log(res.data);
 				setAllItems((prev) => {
 					[...prev, item];
 				});
@@ -40,8 +39,6 @@ export const ItemProvider = ({ children }) => {
 		axios
 			.put(`${url}/items/${id}`, itemData)
 			.then((res) => {
-				console.log(res.data);
-
 				const updatedAllItems = allItems.map((item) => {
 					if (item.id == id) {
 						return { ...item, ...itemData };
