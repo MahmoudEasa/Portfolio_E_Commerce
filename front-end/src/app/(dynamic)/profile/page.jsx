@@ -1,11 +1,13 @@
 "use client";
 
 import { useContext, useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { UserCircleIcon } from "@heroicons/react/24/solid";
 import { UserContext } from "@/context/UserContext";
 
 const Profile = () => {
-	const { user, signup, errors, updateUser } = useContext(UserContext);
+	const router = useRouter();
+	const { user, updateUser } = useContext(UserContext);
 	const [formData, setFormData] = useState({
 		address: user.address,
 		email: user.email,

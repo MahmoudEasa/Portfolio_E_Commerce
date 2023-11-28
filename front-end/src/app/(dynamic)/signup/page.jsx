@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { useContext, useState } from "react";
-import { UserContext } from "@/context/UserContext";
 import { useRouter } from "next/navigation";
+import { UserContext } from "@/context/UserContext";
 
 const SingUp = () => {
 	const router = useRouter();

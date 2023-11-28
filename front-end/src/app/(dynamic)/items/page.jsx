@@ -31,10 +31,13 @@ const Items = () => {
 					>
 						{itemsLen > 0 ? (
 							allItems.map((product) => (
-								<div key={product.id} className="flex flex-col">
+								<div
+									key={product.id}
+									className="flex h-fit flex-col"
+								>
 									<div className="group h-full relative">
 										<div
-											className="aspect-h-1 aspect-w-1 w-full h-4/5 overflow-hidden
+											className="aspect-h-1 aspect-w-1 w-full h-[400px] overflow-hidden
 											rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75"
 										>
 											<img
@@ -52,7 +55,7 @@ const Items = () => {
 													>
 														<span
 															aria-hidden="true"
-															className="absolute inset-0"
+															className="absolute h-4/5 inset-0"
 														/>
 														{product.name.length >
 														11
@@ -88,7 +91,7 @@ const Items = () => {
 											</div>
 										</div>
 										{user && user.is_admin && (
-											<p className="flex flex-col gap-3">
+											<div className="flex flex-col gap-3">
 												<button
 													onClick={() =>
 														removeItem(product.id)
@@ -109,7 +112,7 @@ const Items = () => {
 												>
 													Update Item
 												</Link>
-											</p>
+											</div>
 										)}
 									</div>
 								</div>

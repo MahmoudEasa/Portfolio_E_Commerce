@@ -82,7 +82,7 @@ export const UserProvider = ({ children }) => {
 				localStorage.removeItem("user");
 				setUser("");
 				toast.success(`Logout Successful`);
-				location.reload();
+				window.location.reload();
 			})
 			.catch((err) => {
 				toast.error("Something is wrong");

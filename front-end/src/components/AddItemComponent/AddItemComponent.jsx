@@ -32,7 +32,7 @@ const AddItemComponent = (props) => {
 		} else updateItem(props.update_item, formData);
 	};
 
-	if (!user.is_admin) router.push("/");
+	if (!user || !user.is_admin) router.push("/");
 
 	useEffect(() => {
 		if (props.update_item) {
