@@ -2,10 +2,9 @@
 
 ## Login as Admin
 
-```bash
-# Domain:
 Open [http://54.160.79.52/](http://54.160.79.52/)
 
+```bash
 # Email:
 admin@gmail.com
 
