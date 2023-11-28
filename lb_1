@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Server 355534-lb-01
+
+ssh ubuntu@3.84.238.91
