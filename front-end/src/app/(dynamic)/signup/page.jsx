@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
 import { UserContext } from "@/context/UserContext";
@@ -31,7 +32,9 @@ const SingUp = () => {
 							px-6 py-12 lg:px-8"
 			>
 				<div className="sm:mx-auto sm:w-full sm:max-w-sm">
-					<img
+					<Image
+						width={100}
+						height={100}
 						className="mx-auto h-10 w-auto"
 						src="/images/logo2.png"
 						alt="Logo"

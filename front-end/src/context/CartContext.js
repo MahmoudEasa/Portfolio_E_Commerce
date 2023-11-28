@@ -38,7 +38,6 @@ export const CartProvider = ({ children }) => {
 				.post(`${url}/carts`, data)
 				.then((res) => {
 					toast.success("Product Added to Cart");
-					console.log(res.data);
 				})
 				.catch((err) => {
 					toast.error("Something is wrong");
@@ -106,7 +105,6 @@ export const CartProvider = ({ children }) => {
 			axios
 				.delete(`${url}/carts/${cart_id}`)
 				.then((res) => {
-					console.log(res.data);
 					const carts = cart.filter((c) => c.cart_id != cart_id);
 					setCart(carts);
 					toast.success(res.data.message);

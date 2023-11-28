@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import Image from "next/image";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "@/context/UserContext";
 import { ItemContext } from "@/context/ItemContext";
@@ -13,7 +13,7 @@ const AddItemComponent = (props) => {
 	const [formData, setFormData] = useState({
 		color: "",
 		discription: "",
-		image: "",
+		image: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
 		name: "",
 		price: 0,
 	});
@@ -25,14 +25,18 @@ const AddItemComponent = (props) => {
 			setFormData({
 				color: "",
 				discription: "",
-				image: "",
+				// image: "",
 				name: "",
 				price: 0,
 			});
 		} else updateItem(props.update_item, formData);
 	};
 
-	if (!user || !user.is_admin) router.push("/");
+	if (!user || !user.is_admin) {
+		if (typeof window !== "undefined") {
+			router.push("/");
+		}
+	}
 
 	useEffect(() => {
 		if (props.update_item) {
@@ -41,14 +45,14 @@ const AddItemComponent = (props) => {
 					setFormData({
 						color: item.color,
 						discription: item.discription,
-						image: item.image,
+						// image: item.image,
 						name: item.name,
 						price: item.price,
 					});
 				}
 			});
 		}
-	}, [allItems]);
+	}, [allItems, props.update_item]);
 
 	return (
 		<>
@@ -57,7 +61,9 @@ const AddItemComponent = (props) => {
                         px-6 py-12 lg:px-8"
 			>
 				<div className="sm:mx-auto sm:w-full sm:max-w-sm">
-					<img
+					<Image
+						width={100}
+						height={100}
 						className="mx-auto h-10 w-auto"
 						src="/images/logo2.png"
 						alt="Logo"
@@ -206,7 +212,7 @@ const AddItemComponent = (props) => {
 						</div>
 
 						{/* Image */}
-						<div>
+						{/* <div>
 							<label
 								htmlFor="image"
 								className="block text-sm font-medium leading-6
@@ -235,7 +241,7 @@ const AddItemComponent = (props) => {
                                         focus:ring-indigo-600 sm:text-sm sm:leading-6"
 								/>
 							</div>
-						</div>
+						</div> */}
 
 						<div>
 							<button

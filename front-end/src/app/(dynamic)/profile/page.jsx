@@ -19,7 +19,11 @@ const Profile = () => {
 		updateUser(formData);
 	};
 
-	if (!user) router.push("/");
+	if (!user) {
+		if (typeof window !== "undefined") {
+			router.push("/");
+		}
+	}
 
 	useEffect(() => {
 		setFormData({
