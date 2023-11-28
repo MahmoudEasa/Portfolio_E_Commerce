@@ -25,7 +25,7 @@ const AddItemComponent = (props) => {
 			setFormData({
 				color: "",
 				discription: "",
-				// image: "",
+				image: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
 				name: "",
 				price: 0,
 			});
