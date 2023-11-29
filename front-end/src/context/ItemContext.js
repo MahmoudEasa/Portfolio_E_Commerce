@@ -24,9 +24,8 @@ export const ItemProvider = ({ children }) => {
 		axios
 			.post(`${url}/items`, data)
 			.then((res) => {
-				setAllItems((prev) => {
-					[...prev, item];
-				});
+				const newItems = [...allItems, res.data];
+				setAllItems(newItems);
 				toast.success(`Product Added Successfully`);
 			})
 			.catch((err) => {
