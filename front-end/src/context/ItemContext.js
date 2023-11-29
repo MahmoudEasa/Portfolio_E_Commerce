@@ -18,7 +18,7 @@ export const ItemProvider = ({ children }) => {
 			discription: item.discription,
 			image: item.image,
 			name: item.name,
-			price: item.price,
+			price: Number(item.price),
 		};
 
 		axios
