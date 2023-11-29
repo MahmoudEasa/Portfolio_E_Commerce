@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { UserContext } from "@/context/UserContext";
 
 const SingUp = () => {
 	const router = useRouter();
-	const { user, signup, errors } = useContext(UserContext);
+	const { signup, errors } = useContext(UserContext);
+	const user = JSON.parse(localStorage.getItem("user"));
 	const [formData, setFormData] = useState({
 		address: "",
 		email: "",
@@ -23,7 +24,9 @@ const SingUp = () => {
 		signup(formData);
 	};
 
-	if (user) router.push("/");
+	useEffect(() => {
+		if (user) router.push("/");
+	}, [user]);
 
 	return (
 		<>

@@ -2,13 +2,12 @@
 
 import Image from "next/image";
 import { useContext, useEffect, useState } from "react";
-import { UserContext } from "@/context/UserContext";
 import { ItemContext } from "@/context/ItemContext";
 import { useRouter } from "next/navigation";
 
 const AddItemComponent = (props) => {
 	const router = useRouter();
-	const { user } = useContext(UserContext);
+	const user = JSON.parse(localStorage.getItem("user"));
 	const { allItems, addItem, updateItem } = useContext(ItemContext);
 	const [formData, setFormData] = useState({
 		color: "",
@@ -32,11 +31,9 @@ const AddItemComponent = (props) => {
 		} else updateItem(props.update_item, formData);
 	};
 
-	if (!user || !user.is_admin) {
-		if (typeof window !== "undefined") {
-			router.push("/");
-		}
-	}
+	useEffect(() => {
+		if (!user || !user.is_admin) router.push("/");
+	}, [user]);
 
 	useEffect(() => {
 		if (props.update_item) {
