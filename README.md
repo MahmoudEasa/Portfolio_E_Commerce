@@ -4,18 +4,6 @@
 
 Open [http://54.160.79.52/](http://54.160.79.52/)
 
-```bash
-# Email:
-admin@gmail.com
-
-# Password:
-123456
-
-# Unique Value:
-    - Product Name
-    - Email
-```
-
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
