@@ -12,6 +12,8 @@ module.exports = {
 	theme: {
 		minHeight: {
 			min: "80vh",
+			navmin: "10vh",
+			footermin: "10vh",
 		},
 		extend: {
 			gridTemplateRows: {

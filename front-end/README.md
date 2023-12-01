@@ -12,11 +12,6 @@ yarn dev
 pnpm dev
 # or
 bun dev
-
-
-# Unique Value:
-    - Product Name
-    - Email
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.

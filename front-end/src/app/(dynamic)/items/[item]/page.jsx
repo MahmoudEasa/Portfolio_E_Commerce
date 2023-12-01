@@ -78,7 +78,7 @@ const Item = ({ params }) => {
 	};
 
 	return (
-		<div className="bg-white">
+		<div className="">
 			<div className="pt-6">
 				{/* Image gallery */}
 				<div className="mx-auto mt-6 max-w-2xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:gap-x-8 lg:px-8">
@@ -96,7 +96,7 @@ const Item = ({ params }) => {
 				{/* Product info */}
 				<div className="mx-auto max-w-2xl px-4 pb-16 pt-10 sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-3 lg:grid-rows-[auto,auto,1fr] lg:gap-x-8 lg:px-8 lg:pb-24 lg:pt-16">
 					<div className="lg:col-span-2 lg:border-r lg:border-gray-200 lg:pr-8">
-						<h1 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+						<h1 className="text-2xl font-bold tracking-tight text-gray-400 sm:text-3xl">
 							{item.name}
 						</h1>
 					</div>
@@ -104,7 +104,7 @@ const Item = ({ params }) => {
 					{/* Options */}
 					<div className="mt-4 lg:row-span-3 lg:mt-0">
 						<h2 className="sr-only">Product information</h2>
-						<p className="text-3xl tracking-tight text-gray-900">
+						<p className="text-3xl tracking-tight text-gray-400">
 							${item.price}
 						</p>
 
@@ -118,7 +118,7 @@ const Item = ({ params }) => {
 											key={rating}
 											className={classNames(
 												reviews.average > rating
-													? "text-gray-900"
+													? "text-gray-600"
 													: "text-gray-200",
 												"h-5 w-5 flex-shrink-0"
 											)}
@@ -141,7 +141,7 @@ const Item = ({ params }) => {
 						<form className="mt-10" onSubmit={handleSubmit}>
 							{/* Colors */}
 							<div>
-								<h3 className="text-sm font-medium text-gray-900">
+								<h3 className="text-sm font-medium text-gray-400">
 									Color
 								</h3>
 
@@ -184,7 +184,7 @@ const Item = ({ params }) => {
 													aria-hidden="true"
 													className={classNames(
 														color.class,
-														"h-8 w-8 rounded-full border border-black border-opacity-10"
+														"h-8 w-8 rounded-full border border-white border-opacity-10"
 													)}
 												/>
 											</RadioGroup.Option>
@@ -196,7 +196,7 @@ const Item = ({ params }) => {
 							{/* Sizes */}
 							<div className="mt-10">
 								<div className="flex items-center justify-between">
-									<h3 className="text-sm font-medium text-gray-900">
+									<h3 className="text-sm font-medium text-gray-400">
 										Size
 									</h3>
 									<Link
@@ -224,12 +224,12 @@ const Item = ({ params }) => {
 												className={({ active }) =>
 													classNames(
 														size.inStock
-															? "cursor-pointer bg-white text-gray-900 shadow-sm"
-															: "cursor-not-allowed bg-gray-50 text-gray-200",
+															? "cursor-pointer bg-black text-gray-400 shadow-sm"
+															: "cursor-not-allowed bg-gray-400 text-gray-900",
 														active
 															? "ring-2 ring-indigo-500"
 															: "",
-														"group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6"
+														"group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-600 hover:text-gray-200 focus:outline-none sm:flex-1 sm:py-6"
 													)
 												}
 											>
@@ -300,19 +300,19 @@ const Item = ({ params }) => {
 					<div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
 						{/* Description and details */}
 						<div>
-							<h3 className="text-sm font-medium text-gray-900">
+							<h3 className="text-sm font-medium text-gray-400">
 								Description
 							</h3>
 
 							<div className="space-y-6 mt-4">
-								<p className="text-base text-gray-900">
+								<p className="text-base text-gray-400">
 									{item.discription}
 								</p>
 							</div>
 						</div>
 
 						<div className="mt-10">
-							<h3 className="text-sm font-medium text-gray-900">
+							<h3 className="text-sm font-medium text-gray-400">
 								Highlights
 							</h3>
 
@@ -324,9 +324,9 @@ const Item = ({ params }) => {
 									{product.highlights.map((highlight) => (
 										<li
 											key={highlight}
-											className="text-gray-400"
+											className="text-gray-200"
 										>
-											<span className="text-gray-600">
+											<span className="text-gray-400">
 												{highlight}
 											</span>
 										</li>
@@ -336,12 +336,12 @@ const Item = ({ params }) => {
 						</div>
 
 						<div className="mt-10">
-							<h2 className="text-sm font-medium text-gray-900">
+							<h2 className="text-sm font-medium text-gray-400">
 								Details
 							</h2>
 
 							<div className="mt-4 space-y-6">
-								<p className="text-sm text-gray-600">
+								<p className="text-sm text-gray-400">
 									{product.details}
 								</p>
 							</div>

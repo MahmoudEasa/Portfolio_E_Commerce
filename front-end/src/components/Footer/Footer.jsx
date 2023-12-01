@@ -4,7 +4,7 @@ import Image from "next/image";
 const Footer = () => {
 	return (
 		<footer
-			className="flex justify-between items-center flex-wrap
+			className="flex justify-center items-center flex-wrap sm:justify-between
 						p-5 bg-gray-500 mt-5 h-full w-full gap-5"
 		>
 			<p>&copy; 2023 E-Commerce</p>

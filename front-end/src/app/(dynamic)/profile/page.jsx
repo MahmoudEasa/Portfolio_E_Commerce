@@ -7,31 +7,25 @@ import { UserContext } from "@/context/UserContext";
 
 const Profile = () => {
 	const router = useRouter();
-	const { user, updateUser } = useContext(UserContext);
-	const [formData, setFormData] = useState({
-		address: user.address,
-		email: user.email,
-		username: user.username,
-	});
+	const { updateUser } = useContext(UserContext);
+	const user = JSON.parse(localStorage.getItem("user"));
+	const [formData, setFormData] = useState({});
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		updateUser(formData);
 	};
 
-	if (!user) {
-		if (typeof window !== "undefined") {
-			router.push("/");
-		}
-	}
-
 	useEffect(() => {
-		setFormData({
-			address: user.address,
-			email: user.email,
-			username: user.username,
-		});
-	}, [user]);
+		if (!user) router.push("/");
+		else {
+			setFormData({
+				address: user.address,
+				email: user.email,
+				username: user.username,
+			});
+		}
+	}, []);
 
 	return (
 		<form onSubmit={handleSubmit}>

@@ -2,21 +2,24 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { UserContext } from "@/context/UserContext";
 import { useRouter } from "next/navigation";
 
 const Login = () => {
-	const { user, login, errors } = useContext(UserContext);
+	const { login, errors } = useContext(UserContext);
 	const [formData, setFormData] = useState({ email: "", password: "" });
 	const router = useRouter();
+	const user = JSON.parse(localStorage.getItem("user"));
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		login(formData);
 	};
 
-	if (user) router.push("/");
+	useEffect(() => {
+		if (user) router.push("/");
+	}, [user]);
 
 	return (
 		<>
