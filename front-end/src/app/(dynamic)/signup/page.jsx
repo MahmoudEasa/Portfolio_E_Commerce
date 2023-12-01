@@ -139,6 +139,7 @@ const SingUp = () => {
 							</div>
 							<div className="mt-2">
 								<input
+									required
 									id="password"
 									name="password"
 									type="password"

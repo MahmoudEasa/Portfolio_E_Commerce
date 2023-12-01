@@ -1,14 +1,36 @@
 # Portfolio E-Commerce Project
 
-Open [http://54.160.79.52/](http://54.160.79.52/)
+Demo: Open [http://54.160.79.52/](http://54.160.79.52/)
+
+If you want to run the code locally:
+
+## To Run the Back End
+
+First, you want to install the requirements file
+
+Second, run this command in the root directory:
+
+```bash
+python3 -m api.v1.app
+```
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
 
-First, run the development server:
+## To Run the Front End
+
+First, go to the front-end directory:
+
+Second, run the development server:
 
 ```bash
+# First:
+npm install
+# or
+npm i
+
+# Then:
 npm run dev
 # or
 yarn dev

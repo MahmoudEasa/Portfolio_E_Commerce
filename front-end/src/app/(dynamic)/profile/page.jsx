@@ -25,7 +25,7 @@ const Profile = () => {
 				username: user.username,
 			});
 		}
-	}, [user]);
+	}, []);
 
 	return (
 		<form onSubmit={handleSubmit}>

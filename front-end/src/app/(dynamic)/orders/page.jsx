@@ -20,9 +20,9 @@ const Orders = () => {
 	if (cartLen > 0) orders.map((c) => (subTotal += c.item.price));
 
 	return (
-		<div className="flex w-full min-h-min mt-5 flex-col justify-between bg-white shadow-xl">
+		<div className="flex w-full min-h-min mt-5 flex-col justify-between bg-black shadow-xl">
 			<div className="flex-1 h-full px-4 py-6 sm:px-6">
-				<div className="text-lg font-medium text-gray-900">
+				<div className="text-lg font-medium text-gray-300">
 					Your Orders
 				</div>
 
@@ -30,7 +30,7 @@ const Orders = () => {
 					{loading ? (
 						<div
 							className="h-full flex items-center justify-center
-										py-6 text-center text-gray-900"
+										py-6 text-center text-gray-400"
 						>
 							Loading...
 						</div>
@@ -58,7 +58,7 @@ const Orders = () => {
 
 											<div className="ml-4 flex flex-1 flex-col">
 												<div>
-													<div className="flex justify-between text-base font-medium text-gray-900">
+													<div className="flex justify-between text-base font-medium text-gray-300">
 														<h3>
 															<Link
 																href={`/items/${order.item.id}`}
@@ -73,12 +73,12 @@ const Orders = () => {
 															${order.item.price}
 														</p>
 													</div>
-													<p className="mt-1 text-sm text-gray-500">
+													<p className="mt-1 text-sm text-gray-400">
 														{order.item.color}
 													</p>
 												</div>
 												<div className="flex flex-1 items-end justify-between text-sm">
-													<p className="text-gray-500">
+													<p className="text-gray-400">
 														Qty
 														{" 1 "}
 														{}
@@ -104,7 +104,7 @@ const Orders = () => {
 								) : (
 									<li
 										className="text-center flex flex-col gap-10
-													text-gray-900 mt-10"
+													text-gray-400 mt-10"
 									>
 										<h3>
 											You haven't made any orders yet.
@@ -129,7 +129,7 @@ const Orders = () => {
 			</div>
 
 			<div className="border-t border-gray-200 px-4 py-6 sm:px-6">
-				<div className="flex justify-between text-base font-black text-gray-900">
+				<div className="flex justify-between text-base font-black text-gray-300">
 					<p>Total</p>
 					<p>${subTotal}</p>
 				</div>

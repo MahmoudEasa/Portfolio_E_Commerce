@@ -14,16 +14,6 @@ export const links = [
 		title: "About",
 		url: "/about",
 	},
-	{
-		id: 4,
-		title: "Contact",
-		url: "/contact",
-	},
-	{
-		id: 5,
-		title: "Blog",
-		url: "/blog",
-	},
 ];
 
 export const linksProfile = [
