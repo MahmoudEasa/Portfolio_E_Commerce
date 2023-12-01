@@ -5,13 +5,14 @@ import { useContext, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { OrderContext } from "@/context/OrderContext";
+import { UserContext } from "@/context/UserContext";
 
 const Orders = () => {
 	const { orders, removeOrder, loading } = useContext(OrderContext);
+	const { user } = useContext(UserContext);
 	const router = useRouter();
 	let cartLen = orders.length;
 	let subTotal = 0;
-	const user = JSON.parse(localStorage.getItem("user"));
 
 	useEffect(() => {
 		if (!user) router.push("/");
@@ -107,15 +108,16 @@ const Orders = () => {
 													text-gray-400 mt-10"
 									>
 										<h3>
-											You haven't made any orders yet.
+											{" "}
+											{"You haven't made any orders yet."}
 										</h3>
 										<div className="text-start flex flex-col gap-5 w-full">
 											<p>
-												To place an order, click the
+												{`To place an order, click the
 												"Add to Cart" button on any
 												product page. You can then
 												proceed to checkout and complete
-												your purchase.
+												your purchase.`}
 											</p>
 											<p>We hope to see you back soon!</p>
 											<p>Thanks for shopping with us.</p>

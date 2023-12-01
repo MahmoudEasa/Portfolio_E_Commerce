@@ -2,12 +2,13 @@
 
 import Image from "next/image";
 import { useContext, useEffect, useState } from "react";
+import { UserContext } from "@/context/UserContext";
 import { ItemContext } from "@/context/ItemContext";
 import { useRouter } from "next/navigation";
 
 const AddItemComponent = (props) => {
 	const router = useRouter();
-	const user = JSON.parse(localStorage.getItem("user"));
+	const { user } = useContext(UserContext);
 	const { allItems, addItem, updateItem } = useContext(ItemContext);
 	const [formData, setFormData] = useState({
 		color: "",

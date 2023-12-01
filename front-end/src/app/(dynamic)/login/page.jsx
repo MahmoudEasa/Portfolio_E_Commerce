@@ -7,10 +7,9 @@ import { UserContext } from "@/context/UserContext";
 import { useRouter } from "next/navigation";
 
 const Login = () => {
-	const { login, errors } = useContext(UserContext);
+	const { user, login, errors } = useContext(UserContext);
 	const [formData, setFormData] = useState({ email: "", password: "" });
 	const router = useRouter();
-	const user = JSON.parse(localStorage.getItem("user"));
 
 	const handleSubmit = (e) => {
 		e.preventDefault();

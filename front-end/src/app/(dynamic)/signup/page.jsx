@@ -8,8 +8,7 @@ import { UserContext } from "@/context/UserContext";
 
 const SingUp = () => {
 	const router = useRouter();
-	const { signup, errors } = useContext(UserContext);
-	const user = JSON.parse(localStorage.getItem("user"));
+	const { user, signup, errors } = useContext(UserContext);
 	const [formData, setFormData] = useState({
 		address: "",
 		email: "",

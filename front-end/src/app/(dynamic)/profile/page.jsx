@@ -7,8 +7,7 @@ import { UserContext } from "@/context/UserContext";
 
 const Profile = () => {
 	const router = useRouter();
-	const { updateUser } = useContext(UserContext);
-	const user = JSON.parse(localStorage.getItem("user"));
+	const { user, updateUser } = useContext(UserContext);
 	const [formData, setFormData] = useState({});
 
 	const handleSubmit = (e) => {

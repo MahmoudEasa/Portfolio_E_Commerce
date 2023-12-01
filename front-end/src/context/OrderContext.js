@@ -58,7 +58,7 @@ export const OrderProvider = ({ children }) => {
 
 	useEffect(() => {
 		getOrders();
-	}, [items, getOrders]);
+	}, [items]);
 
 	return (
 		<OrderContext.Provider
