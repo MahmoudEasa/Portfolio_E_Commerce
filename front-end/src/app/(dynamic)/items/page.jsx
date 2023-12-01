@@ -11,6 +11,7 @@ const Items = () => {
 	const { allItems, removeItem } = useContext(ItemContext);
 	const { addToCart, loading } = useContext(CartContext);
 	const { user } = useContext(UserContext);
+	const itemsSort = allItems.sort((a, b) => a.name.localeCompare(b.name));
 	const itemsLen = allItems.length;
 
 	return (
@@ -30,7 +31,7 @@ const Items = () => {
 								lg:grid-cols-4 xl:gap-x-8"
 					>
 						{itemsLen > 0 ? (
-							allItems.map((product) => (
+							itemsSort.map((product) => (
 								<div
 									key={product.id}
 									className="flex h-fit flex-col"
@@ -72,7 +73,7 @@ const Items = () => {
 													{product.color}
 												</p>
 											</div>
-											<div className="text-end relative">
+											<div className="text-end min-w-8 relative">
 												<p className="text-sm font-medium text-gray-300">
 													${product.price}
 												</p>

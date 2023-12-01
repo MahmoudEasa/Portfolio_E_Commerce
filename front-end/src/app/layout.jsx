@@ -28,7 +28,7 @@ export default function RootLayout({ children }) {
 								<ToastContainer />
 								<Navbar />
 								<Cart />
-								<main className="container mx-auto min-h-min">
+								<main className="container bg-black mx-auto min-h-min">
 									{children}
 								</main>
 								<Footer />
