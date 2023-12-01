@@ -26,7 +26,7 @@ const SingUp = () => {
 
 	useEffect(() => {
 		if (user) router.push("/");
-	}, [user]);
+	}, [user, router]);
 
 	return (
 		<>

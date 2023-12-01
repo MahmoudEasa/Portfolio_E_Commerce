@@ -15,7 +15,7 @@ const Orders = () => {
 
 	useEffect(() => {
 		if (!user) router.push("/");
-	}, [user]);
+	}, [user, router]);
 
 	if (cartLen > 0) orders.map((c) => (subTotal += c.item.price));
 

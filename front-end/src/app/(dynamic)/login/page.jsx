@@ -19,7 +19,7 @@ const Login = () => {
 
 	useEffect(() => {
 		if (user) router.push("/");
-	}, [user]);
+	}, [user, router]);
 
 	return (
 		<>

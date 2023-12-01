@@ -33,7 +33,7 @@ const AddItemComponent = (props) => {
 
 	useEffect(() => {
 		if (!user || !user.is_admin) router.push("/");
-	}, [user]);
+	}, [user, router]);
 
 	useEffect(() => {
 		if (props.update_item) {
