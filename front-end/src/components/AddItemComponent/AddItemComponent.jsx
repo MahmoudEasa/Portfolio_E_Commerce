@@ -1,19 +1,18 @@
 "use client";
 
-import Link from "next/link";
+import Image from "next/image";
 import { useContext, useEffect, useState } from "react";
-import { UserContext } from "@/context/UserContext";
 import { ItemContext } from "@/context/ItemContext";
 import { useRouter } from "next/navigation";
 
 const AddItemComponent = (props) => {
 	const router = useRouter();
-	const { user } = useContext(UserContext);
+	const user = JSON.parse(localStorage.getItem("user"));
 	const { allItems, addItem, updateItem } = useContext(ItemContext);
 	const [formData, setFormData] = useState({
 		color: "",
 		discription: "",
-		image: "",
+		image: "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
 		name: "",
 		price: 0,
 	});
@@ -23,16 +22,18 @@ const AddItemComponent = (props) => {
 		if (props.method == "addItem") {
 			addItem(formData);
 			setFormData({
+				...formData,
 				color: "",
 				discription: "",
-				image: "",
 				name: "",
 				price: 0,
 			});
 		} else updateItem(props.update_item, formData);
 	};
 
-	if (!user.is_admin) router.push("/");
+	useEffect(() => {
+		if (!user || !user.is_admin) router.push("/");
+	}, [user]);
 
 	useEffect(() => {
 		if (props.update_item) {
@@ -41,14 +42,14 @@ const AddItemComponent = (props) => {
 					setFormData({
 						color: item.color,
 						discription: item.discription,
-						image: item.image,
+						// image: item.image,
 						name: item.name,
 						price: item.price,
 					});
 				}
 			});
 		}
-	}, [allItems]);
+	}, [allItems, props.update_item]);
 
 	return (
 		<>
@@ -57,7 +58,9 @@ const AddItemComponent = (props) => {
                         px-6 py-12 lg:px-8"
 			>
 				<div className="sm:mx-auto sm:w-full sm:max-w-sm">
-					<img
+					<Image
+						width={100}
+						height={100}
 						className="mx-auto h-10 w-auto"
 						src="/images/logo2.png"
 						alt="Logo"
@@ -206,7 +209,7 @@ const AddItemComponent = (props) => {
 						</div>
 
 						{/* Image */}
-						<div>
+						{/* <div>
 							<label
 								htmlFor="image"
 								className="block text-sm font-medium leading-6
@@ -235,7 +238,7 @@ const AddItemComponent = (props) => {
                                         focus:ring-indigo-600 sm:text-sm sm:leading-6"
 								/>
 							</div>
-						</div>
+						</div> */}
 
 						<div>
 							<button

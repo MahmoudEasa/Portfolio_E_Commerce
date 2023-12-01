@@ -76,7 +76,7 @@ def post_item():
 
         return make_response(jsonify(item), 201)
     except Exception:
-        return make_response(jsonify({'message': 'Something is wrong'}), 400)
+        return make_response(jsonify({'message': 'Product Name should be unique.'}), 400)
 
 
 @app_views.route('/items/<item_id>', methods=['PUT'], strict_slashes=False)

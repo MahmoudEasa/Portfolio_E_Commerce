@@ -18,16 +18,14 @@ export const ItemProvider = ({ children }) => {
 			discription: item.discription,
 			image: item.image,
 			name: item.name,
-			price: item.price,
+			price: Number(item.price),
 		};
 
 		axios
 			.post(`${url}/items`, data)
 			.then((res) => {
-				console.log(res.data);
-				setAllItems((prev) => {
-					[...prev, item];
-				});
+				const newItems = [...allItems, res.data];
+				setAllItems(newItems);
 				toast.success(`Product Added Successfully`);
 			})
 			.catch((err) => {
@@ -40,8 +38,6 @@ export const ItemProvider = ({ children }) => {
 		axios
 			.put(`${url}/items/${id}`, itemData)
 			.then((res) => {
-				console.log(res.data);
-
 				const updatedAllItems = allItems.map((item) => {
 					if (item.id == id) {
 						return { ...item, ...itemData };

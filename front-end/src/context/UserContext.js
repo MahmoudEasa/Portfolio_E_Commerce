@@ -36,8 +36,7 @@ export const UserProvider = ({ children }) => {
 							return response.data;
 						});
 
-						const results = await Promise.all(promises);
-						console.log(results);
+						await Promise.all(promises);
 					} catch (error) {
 						toast.error("Something is wrong");
 						console.log(error);
@@ -63,7 +62,6 @@ export const UserProvider = ({ children }) => {
 		axios
 			.post(`${url}/users`, userData)
 			.then((res) => {
-				console.log(res.data);
 				toast.success(`Sign In Successful ${res.data.username}`);
 				router.push("/login");
 			})
@@ -78,11 +76,12 @@ export const UserProvider = ({ children }) => {
 		axios
 			.get(`${url}/logout`)
 			.then((res) => {
-				console.log(res.data);
 				localStorage.removeItem("user");
 				setUser("");
 				toast.success(`Logout Successful`);
-				location.reload();
+				if (typeof window !== "undefined") {
+					window.location.reload();
+				}
 			})
 			.catch((err) => {
 				toast.error("Something is wrong");
@@ -96,7 +95,6 @@ export const UserProvider = ({ children }) => {
 			.then((res) => {
 				localStorage.setItem("user", JSON.stringify(res.data));
 				setUser(res.data);
-				console.log(res.data);
 				toast.success("The data has been updated successfully");
 			})
 			.catch((err) => {

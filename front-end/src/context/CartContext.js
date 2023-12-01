@@ -3,6 +3,7 @@
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 import { url } from "@/data";
 
 export const CartContext = createContext();
@@ -12,13 +13,15 @@ export const CartProvider = ({ children }) => {
 	const [cart, setCart] = useState([]);
 	const [open, setOpen] = useState(false);
 	const [loading, setLoading] = useState(false);
-	const user = JSON.parse(localStorage.getItem("user"));
+	const router = useRouter();
 
 	const toggleOpen = () => {
 		setOpen((prev) => !prev);
 	};
 
 	const addToCart = (item) => {
+		const user = JSON.parse(localStorage.getItem("user"));
+
 		if (!user) {
 			const newCart = [...cart];
 			const newItem = { item, cart_id: item.id };
@@ -35,7 +38,6 @@ export const CartProvider = ({ children }) => {
 				.post(`${url}/carts`, data)
 				.then((res) => {
 					toast.success("Product Added to Cart");
-					console.log(res.data);
 				})
 				.catch((err) => {
 					toast.error("Something is wrong");
@@ -45,7 +47,7 @@ export const CartProvider = ({ children }) => {
 	};
 
 	const getCarts = async () => {
-		const user1 = JSON.parse(localStorage.getItem("user"));
+		const user = JSON.parse(localStorage.getItem("user"));
 		setLoading(true);
 		let allItems;
 
@@ -58,7 +60,7 @@ export const CartProvider = ({ children }) => {
 			console.log(err);
 		}
 
-		if (!user1) {
+		if (!user) {
 			const storedData = JSON.parse(localStorage.getItem("cart"));
 			if (storedData) setCart(storedData);
 		} else {
@@ -91,6 +93,8 @@ export const CartProvider = ({ children }) => {
 	};
 
 	const removeFromCart = (id, cart_id) => {
+		const user = JSON.parse(localStorage.getItem("user"));
+
 		if (!user) {
 			const carts = JSON.parse(localStorage.getItem("cart"));
 			const newCart = carts.filter((item) => item.cart_id != cart_id);
@@ -101,7 +105,6 @@ export const CartProvider = ({ children }) => {
 			axios
 				.delete(`${url}/carts/${cart_id}`)
 				.then((res) => {
-					console.log(res.data);
 					const carts = cart.filter((c) => c.cart_id != cart_id);
 					setCart(carts);
 					toast.success(res.data.message);
@@ -114,7 +117,13 @@ export const CartProvider = ({ children }) => {
 	};
 
 	const checkout = async (checkoutData) => {
-		if (checkoutData && checkoutData.length > 0) {
+		const user = JSON.parse(localStorage.getItem("user"));
+
+		if (!user) {
+			setOpen(false);
+			toast.warn("You must be signed in to checkout.");
+			router.push("/login");
+		} else if (checkoutData && checkoutData.length > 0) {
 			try {
 				const promises = [];
 
@@ -128,7 +137,7 @@ export const CartProvider = ({ children }) => {
 					promises.push(axios.delete(`${url}/carts/${item.cart_id}`));
 				});
 
-				const results = await axios.all(promises);
+				await axios.all(promises);
 				toast.success(`Your order has been placed successfully.`);
 				toggleOpen();
 			} catch (error) {

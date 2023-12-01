@@ -6,8 +6,9 @@ import Navbar from "@/components/Navbar/Navbar";
 import Footer from "@/components/Footer/Footer";
 import { UserProvider } from "@/context/UserContext";
 import { CartProvider } from "@/context/CartContext";
-import Cart from "@/components/Cart/Cart";
 import { ItemProvider } from "@/context/ItemContext";
+import { OrderProvider } from "@/context/OrderContext";
+import Cart from "@/components/Cart/Cart";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,13 +24,15 @@ export default function RootLayout({ children }) {
 				<UserProvider>
 					<CartProvider>
 						<ItemProvider>
-							<ToastContainer />
-							<Navbar />
-							<Cart />
-							<main className="container mx-auto min-h-min">
-								{children}
-							</main>
-							<Footer />
+							<OrderProvider>
+								<ToastContainer />
+								<Navbar />
+								<Cart />
+								<main className="container mx-auto min-h-min">
+									{children}
+								</main>
+								<Footer />
+							</OrderProvider>
 						</ItemProvider>
 					</CartProvider>
 				</UserProvider>

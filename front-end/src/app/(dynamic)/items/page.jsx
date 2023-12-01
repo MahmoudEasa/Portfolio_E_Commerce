@@ -8,7 +8,7 @@ import { CartContext } from "@/context/CartContext";
 import { UserContext } from "@/context/UserContext";
 
 const Items = () => {
-	const { allItems, updateItem, removeItem } = useContext(ItemContext);
+	const { allItems, removeItem } = useContext(ItemContext);
 	const { addToCart, loading } = useContext(CartContext);
 	const { user } = useContext(UserContext);
 	const itemsLen = allItems.length;
@@ -17,7 +17,7 @@ const Items = () => {
 		<div className="">
 			<div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
 				<h2 className="text-2xl font-bold tracking-tight text-gray-300">
-					Customers also purchased
+					All Products
 				</h2>
 
 				{loading ? (
@@ -31,14 +31,19 @@ const Items = () => {
 					>
 						{itemsLen > 0 ? (
 							allItems.map((product) => (
-								<div key={product.id} className="flex flex-col">
+								<div
+									key={product.id}
+									className="flex h-fit flex-col"
+								>
 									<div className="group h-full relative">
 										<div
-											className="aspect-h-1 aspect-w-1 w-full h-4/5 overflow-hidden
+											className="aspect-h-1 aspect-w-1 w-full h-[400px] overflow-hidden
 											rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75"
 										>
-											<img
+											<Image
 												src={product.image}
+												width={100}
+												height={100}
 												alt={product.name}
 												className="h-full w-full object-cover object-center
 												lg:h-full lg:w-full"
@@ -52,7 +57,7 @@ const Items = () => {
 													>
 														<span
 															aria-hidden="true"
-															className="absolute inset-0"
+															className="absolute h-4/5 inset-0"
 														/>
 														{product.name.length >
 														11
@@ -78,17 +83,19 @@ const Items = () => {
 														}
 														className="absolute top-6 right-0 block"
 													>
-														<img
+														<Image
+															width={32}
+															height={32}
 															src="/images/icons/add-to-cart.png"
 															alt="Add to cart"
-															className="h-8 hover:opacity-80"
+															className="h-8 w-8 hover:opacity-80"
 														/>
 													</button>
 												</p>
 											</div>
 										</div>
 										{user && user.is_admin && (
-											<p className="flex flex-col gap-3">
+											<div className="flex flex-col gap-3">
 												<button
 													onClick={() =>
 														removeItem(product.id)
@@ -109,7 +116,7 @@ const Items = () => {
 												>
 													Update Item
 												</Link>
-											</p>
+											</div>
 										)}
 									</div>
 								</div>

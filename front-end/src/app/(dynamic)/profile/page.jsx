@@ -1,31 +1,31 @@
 "use client";
 
 import { useContext, useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { UserCircleIcon } from "@heroicons/react/24/solid";
 import { UserContext } from "@/context/UserContext";
 
 const Profile = () => {
-	const { user, signup, errors, updateUser } = useContext(UserContext);
-	const [formData, setFormData] = useState({
-		address: user.address,
-		email: user.email,
-		username: user.username,
-	});
+	const router = useRouter();
+	const { updateUser } = useContext(UserContext);
+	const user = JSON.parse(localStorage.getItem("user"));
+	const [formData, setFormData] = useState({});
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		updateUser(formData);
 	};
 
-	if (!user) router.push("/");
-
 	useEffect(() => {
-		setFormData({
-			address: user.address,
-			email: user.email,
-			username: user.username,
-		});
-	}, [user]);
+		if (!user) router.push("/");
+		else {
+			setFormData({
+				address: user.address,
+				email: user.email,
+				username: user.username,
+			});
+		}
+	}, []);
 
 	return (
 		<form onSubmit={handleSubmit}>

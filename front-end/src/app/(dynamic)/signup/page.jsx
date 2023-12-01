@@ -1,13 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { useContext, useState } from "react";
-import { UserContext } from "@/context/UserContext";
+import Image from "next/image";
+import { useContext, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { UserContext } from "@/context/UserContext";
 
 const SingUp = () => {
 	const router = useRouter();
-	const { user, signup, errors } = useContext(UserContext);
+	const { signup, errors } = useContext(UserContext);
+	const user = JSON.parse(localStorage.getItem("user"));
 	const [formData, setFormData] = useState({
 		address: "",
 		email: "",
@@ -22,7 +24,9 @@ const SingUp = () => {
 		signup(formData);
 	};
 
-	if (user) router.push("/");
+	useEffect(() => {
+		if (user) router.push("/");
+	}, [user]);
 
 	return (
 		<>
@@ -31,7 +35,9 @@ const SingUp = () => {
 							px-6 py-12 lg:px-8"
 			>
 				<div className="sm:mx-auto sm:w-full sm:max-w-sm">
-					<img
+					<Image
+						width={100}
+						height={100}
 						className="mx-auto h-10 w-auto"
 						src="/images/logo2.png"
 						alt="Logo"
@@ -133,6 +139,7 @@ const SingUp = () => {
 							</div>
 							<div className="mt-2">
 								<input
+									required
 									id="password"
 									name="password"
 									type="password"

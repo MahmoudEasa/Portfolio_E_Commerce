@@ -29,7 +29,7 @@ const Cart = () => {
 					leaveFrom="opacity-100"
 					leaveTo="opacity-0"
 				>
-					<div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+					<div className="fixed inset-0 bg-gray-200 bg-opacity-75 transition-opacity" />
 				</Transition.Child>
 
 				<div className="fixed inset-0 overflow-hidden">
@@ -45,16 +45,16 @@ const Cart = () => {
 								leaveTo="translate-x-full"
 							>
 								<Dialog.Panel className="pointer-events-auto w-screen max-w-md">
-									<div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
+									<div className="flex h-full flex-col overflow-y-scroll bg-black shadow-xl">
 										<div className="flex-1 overflow-y-auto px-4 py-6 sm:px-6">
 											<div className="flex items-start justify-between">
-												<Dialog.Title className="text-lg font-medium text-gray-900">
+												<Dialog.Title className="text-lg font-medium text-gray-300">
 													Shopping cart
 												</Dialog.Title>
 												<div className="ml-3 flex h-7 items-center">
 													<button
 														type="button"
-														className="relative -m-2 p-2 text-gray-400 hover:text-gray-500"
+														className="relative -m-2 p-2 text-gray-200 hover:text-gray-400"
 														onClick={() =>
 															toggleOpen()
 														}
@@ -73,7 +73,7 @@ const Cart = () => {
 
 											<div className="mt-8">
 												{loading ? (
-													<div className="flow-root py-6 text-center text-gray-900">
+													<div className="flow-root py-6 text-center text-gray-300">
 														Loading...
 													</div>
 												) : (
@@ -94,7 +94,13 @@ const Cart = () => {
 																			className="flex py-6"
 																		>
 																			<div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-																				<img
+																				<Image
+																					width={
+																						100
+																					}
+																					height={
+																						100
+																					}
 																					src={
 																						product
 																							.item
@@ -111,7 +117,7 @@ const Cart = () => {
 
 																			<div className="ml-4 flex flex-1 flex-col">
 																				<div>
-																					<div className="flex justify-between text-base font-medium text-gray-900">
+																					<div className="flex justify-between text-base font-medium text-gray-300">
 																						<h3>
 																							<Link
 																								href={`/items/${product.item.id}`}
@@ -132,7 +138,7 @@ const Cart = () => {
 																							}
 																						</p>
 																					</div>
-																					<p className="mt-1 text-sm text-gray-500">
+																					<p className="mt-1 text-sm text-gray-400">
 																						{
 																							product
 																								.item
@@ -141,7 +147,7 @@ const Cart = () => {
 																					</p>
 																				</div>
 																				<div className="flex flex-1 items-end justify-between text-sm">
-																					<p className="text-gray-500">
+																					<p className="text-gray-400">
 																						Qty
 																						{
 																							" 1 "
@@ -171,7 +177,7 @@ const Cart = () => {
 																	)
 																)
 															) : (
-																<li className="py-6 text-center text-gray-900">
+																<li className="py-6 text-center text-gray-300">
 																	<h3>
 																		Your
 																		cart is
@@ -186,11 +192,11 @@ const Cart = () => {
 										</div>
 
 										<div className="border-t border-gray-200 px-4 py-6 sm:px-6">
-											<div className="flex justify-between text-base font-medium text-gray-900">
+											<div className="flex justify-between text-base font-medium text-gray-300">
 												<p>Subtotal</p>
 												<p>${subTotal}</p>
 											</div>
-											<p className="mt-0.5 text-sm text-gray-500">
+											<p className="mt-0.5 text-sm text-gray-400">
 												Shipping and taxes calculated at
 												checkout.
 											</p>
@@ -207,7 +213,7 @@ const Cart = () => {
 													Checkout
 												</button>
 											</div>
-											<div className="mt-6 flex justify-center gap-5 text-center text-sm text-gray-500">
+											<div className="mt-6 flex justify-center gap-5 text-center text-sm text-gray-400">
 												<p>or</p>
 												<button
 													type="button"

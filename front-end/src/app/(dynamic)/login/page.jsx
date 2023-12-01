@@ -1,21 +1,25 @@
 "use client";
 
 import Link from "next/link";
-import { useContext, useState } from "react";
+import Image from "next/image";
+import { useContext, useState, useEffect } from "react";
 import { UserContext } from "@/context/UserContext";
 import { useRouter } from "next/navigation";
 
 const Login = () => {
-	const { user, login, errors } = useContext(UserContext);
+	const { login, errors } = useContext(UserContext);
 	const [formData, setFormData] = useState({ email: "", password: "" });
 	const router = useRouter();
+	const user = JSON.parse(localStorage.getItem("user"));
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		login(formData);
 	};
 
-	if (user) router.push("/");
+	useEffect(() => {
+		if (user) router.push("/");
+	}, [user]);
 
 	return (
 		<>
@@ -24,7 +28,9 @@ const Login = () => {
 							px-6 py-12 lg:px-8"
 			>
 				<div className="sm:mx-auto sm:w-full sm:max-w-sm">
-					<img
+					<Image
+						width={100}
+						height={100}
 						className="mx-auto h-10 w-auto"
 						src="/images/logo2.png"
 						alt="Logo"

@@ -53,7 +53,7 @@ const Navbar = () => {
 								className="flex flex-1 items-center justify-center
 											sm:items-stretch sm:justify-start"
 							>
-								<div className="flex flex-shrink-0 items-center">
+								<div className="flex-shrink-0 items-center hidden sm:flex">
 									<Link href={"/"}>
 										<Image
 											width={150}
@@ -64,7 +64,7 @@ const Navbar = () => {
 									</Link>
 								</div>
 								<div className="hidden sm:ml-6 sm:block">
-									<div className="flex space-x-4">
+									<div className="flex">
 										{links.map((link) => (
 											<Link
 												key={link.id}
@@ -91,7 +91,11 @@ const Navbar = () => {
 								/>
 								<Menu as="div" className="relative ml-3">
 									<div>
-										<Menu.Button className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+										<Menu.Button
+											className="relative flex rounded-full bg-gray-800 text-sm
+																focus:outline-none focus:ring-2 focus:ring-white
+																focus:ring-offset-2 focus:ring-offset-gray-800"
+										>
 											<span className="absolute -inset-1.5" />
 											<span className="sr-only">
 												Open user menu
@@ -114,7 +118,11 @@ const Navbar = () => {
 										leaveFrom="transform opacity-100 scale-100"
 										leaveTo="transform opacity-0 scale-95"
 									>
-										<Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+										<Menu.Items
+											className="absolute right-0 z-10 mt-2 w-48 origin-top-right
+																rounded-md bg-white py-1 shadow-lg ring-1
+																ring-black ring-opacity-5 focus:outline-none"
+										>
 											{user ? (
 												<>
 													{linksProfile.map(
@@ -126,7 +134,8 @@ const Navbar = () => {
 																	href={
 																		link.url
 																	}
-																	className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200"
+																	className="block px-4 py-2 text-sm text-gray-700
+																				hover:bg-gray-200"
 																>
 																	{link.title}
 																</Link>
@@ -146,7 +155,8 @@ const Navbar = () => {
 																			href={
 																				link.url
 																			}
-																			className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200"
+																			className="block px-4 py-2 text-sm
+																					text-gray-700 hover:bg-gray-200"
 																		>
 																			{
 																				link.title
@@ -197,6 +207,16 @@ const Navbar = () => {
 					</div>
 
 					<Disclosure.Panel className="sm:hidden">
+						<div className="flex flex-shrink-0 justify-center items-center">
+							<Link href={"/"}>
+								<Image
+									width={150}
+									height={150}
+									src="/images/logo2.png"
+									alt="Your Company"
+								/>
+							</Link>
+						</div>
 						<div className="space-y-1 px-2 pb-3 pt-2">
 							{links.map((link) => (
 								<Link
