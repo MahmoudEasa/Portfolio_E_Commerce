@@ -6,8 +6,7 @@ from api.v1.views import app_views
 from flask import abort, jsonify, make_response, request
 
 
-@app_views.route('/items', methods=['GET'], strict_slashes=False)
-def get_items():
+def get_items_array():
     """
     Retrieves the list of all item objects
     or a specific item
@@ -17,7 +16,17 @@ def get_items():
     for item in all_items:
         list_items.append(item.to_dict())
 
-    return (jsonify(list_items))
+    return (list_items)
+
+
+@app_views.route('/items', methods=['GET'], strict_slashes=False)
+def get_items():
+    """
+    Retrieves the list of all item objects
+    or a specific item
+    """
+    all_items = get_items_array()
+    return (jsonify(all_items))
 
 
 @app_views.route('/items/<item_id>', methods=['GET'], strict_slashes=False)
@@ -69,32 +78,50 @@ def post_item():
     if 'image' not in data:
         abort(400, description="Missing image")
 
-    try:
-        instance = Item(**data)
-        instance.save()
-        item = instance.to_dict()
+    all_items = get_items_array()
 
-        return make_response(jsonify(item), 201)
+    for i in all_items:
+        if (i['name'] == data['name']):
+            return make_response(jsonify({
+                'message': 'Product name should be unique.'
+                }), 400)
+
+
+    instance = Item(**data)
+    instance.save()
+    item = instance.to_dict()
+
+    return make_response(jsonify(item), 201)
+    """ try:
     except Exception:
-        return make_response(jsonify({'message': 'Product Name should be unique.'}), 400)
-
+        return make_response(jsonify({'message': 'Something is wrong'}), 400)
+"""
 
 @app_views.route('/items/<item_id>', methods=['PUT'], strict_slashes=False)
 def put_item(item_id):
     """
     Updates a item
     """
-    item = storage.get(Item, item_id).first()
-
-    if not item:
-        abort(404)
-
     try:
+        item = storage.get(Item, item_id).first()
+
+        if not item:
+            abort(404)
+
         data = request.get_json()
         if not data:
             abort(400, description="Not a JSON")
 
         ignore = ['id', 'created_at', 'updated_at']
+
+        all_items = get_items_array()
+
+        for i in all_items:
+            if (i['name'] == data['name']):
+                if i['id'] != item.id:
+                    return make_response(jsonify({
+                        'message': 'Product name should be unique.'
+                        }), 400)
 
         for key, value in data.items():
             if key not in ignore:
