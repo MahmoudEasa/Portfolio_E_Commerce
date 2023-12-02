@@ -67,7 +67,7 @@ const AddItemComponent = (props) => {
 		if (image) handleImage(image);
 		else {
 			if (props.method == "addItem") {
-				addItem(formData);
+				addItem(formData, null);
 				setFormData({
 					...formData,
 					color: "",
@@ -75,7 +75,7 @@ const AddItemComponent = (props) => {
 					name: "",
 					price: 0,
 				});
-			} else updateItem(props.update_item, formData);
+			} else updateItem(props.update_item, formData, null);
 		}
 	};
 

@@ -105,7 +105,11 @@ const Navbar = () => {
 												width={35}
 												height={35}
 												className="rounded-full"
-												src="/images/profiles/user_default.png"
+												src={
+													user && user.photo
+														? user.photo
+														: "/images/profiles/user_default.png"
+												}
 												alt=""
 											/>
 										</Menu.Button>

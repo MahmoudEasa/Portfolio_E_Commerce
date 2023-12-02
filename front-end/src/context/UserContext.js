@@ -3,8 +3,9 @@
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { url } from "@/data";
+import { url, deleteImage } from "@/data";
 import { useRouter } from "next/navigation";
+import { deleteObject } from "firebase/storage";
 
 export const UserContext = createContext();
 
@@ -89,17 +90,25 @@ export const UserProvider = ({ children }) => {
 			});
 	};
 
-	const updateUser = (obj) => {
+	const updateUser = (obj, imgRef) => {
 		axios
 			.put(`${url}/users/${user.id}`, obj)
 			.then((res) => {
+				if (imgRef) deleteImage(null, null, user.photo);
 				localStorage.setItem("user", JSON.stringify(res.data));
 				setUser(res.data);
 				toast.success("The data has been updated successfully");
 			})
 			.catch((err) => {
-				toast.error(err.response.data.message);
-				setErrors(err.response.data.message);
+				if (imgRef) {
+					deleteObject(imgRef).catch((error) => {
+						console.log(error);
+					});
+				}
+				if (err.response) {
+					toast.error(err.response.data.message);
+					setErrors(err.response.data.message);
+				} else toast.error("Something is wrong");
 				console.log(err);
 			});
 	};

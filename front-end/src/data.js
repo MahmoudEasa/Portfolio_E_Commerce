@@ -1,6 +1,6 @@
 // Initialise Firebase
 import { initializeApp } from "firebase/app";
-import { getStorage } from "firebase/storage";
+import { ref, getStorage, deleteObject } from "firebase/storage";
 
 const firebaseConfig = {
 	apiKey: "AIzaSyCY0s8wik3CN_LBG7WkkjI-pYe3TXL5cjg",
@@ -14,6 +14,24 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const imageDb = getStorage(app);
+
+// Delete Image From Firebase
+export const deleteImage = (itemId, allItems, userPhoto = null) => {
+	if (!allItems && !userPhoto) return;
+	console.log(userPhoto);
+	let itemDeleted = userPhoto
+		? userPhoto
+		: allItems.filter((i) => i.id == itemId)[0].image;
+	const uid = itemDeleted.substring(
+		itemDeleted.indexOf("images%") + 9,
+		itemDeleted.indexOf("?alt")
+	);
+	const imgRef = ref(imageDb, `images/${uid}`);
+
+	deleteObject(imgRef).catch((error) => {
+		console.log(error);
+	});
+};
 
 export const links = [
 	{
