@@ -85,7 +85,8 @@ const Navbar = () => {
 							>
 								{/* Profile dropdown */}
 								<Button
-									className="text-sm focus:outline-none"
+									class="text-sm text-gray-100 hover:text-gray-300
+												focus:outline-none"
 									func={toggleOpen}
 									name={"Cart"}
 								/>

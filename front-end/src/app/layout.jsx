@@ -20,7 +20,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
 	return (
 		<html lang="en">
-			<body className={inter.className}>
+			<body className={`${inter.className} bg-black`}>
 				<UserProvider>
 					<CartProvider>
 						<ItemProvider>
@@ -28,7 +28,10 @@ export default function RootLayout({ children }) {
 								<ToastContainer />
 								<Navbar />
 								<Cart />
-								<main className="container bg-black mx-auto min-h-min">
+								<main
+									className="container bg-black
+													mx-auto min-h-min"
+								>
 									{children}
 								</main>
 								<Footer />
