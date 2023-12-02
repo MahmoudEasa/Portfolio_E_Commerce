@@ -73,7 +73,7 @@ const Items = () => {
 													{product.color}
 												</p>
 											</div>
-											<div className="text-end min-w-8 relative">
+											<div className="text-end min-w-[50px] relative">
 												<p className="text-sm font-medium text-gray-300">
 													${product.price}
 												</p>
