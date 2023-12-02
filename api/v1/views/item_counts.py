@@ -12,23 +12,29 @@ def get_item_counts():
     Retrieves the list of all item_count objects
     or a specific item_count
     """
-    all_item_counts = storage.all(ItemCount).values()
-    list_item_counts = []
-    for item_count in all_item_counts:
-        list_item_counts.append(item_count.to_dict())
+    try:
+        all_item_counts = storage.all(ItemCount).values()
+        list_item_counts = []
+        for item_count in all_item_counts:
+            list_item_counts.append(item_count.to_dict())
 
-    return (jsonify(list_item_counts))
+        return (jsonify(list_item_counts))
+    except Exception:
+        return make_response(jsonify({'message': 'Something is wrong'}), 400)
 
 
 @app_views.route('/item_counts/<item_count_id>', methods=['GET'], strict_slashes=False)
 def get_item_count(item_count_id):
     """ Retrieves an item_count """
-    item_count = storage.get(ItemCount, item_count_id).first()
+    try:
+        item_count = storage.get(ItemCount, item_count_id).first()
 
-    if not item_count:
-        abort(404)
+        if not item_count:
+            abort(404)
 
-    return jsonify(item_count.to_dict())
+        return jsonify(item_count.to_dict())
+    except Exception:
+        return make_response(jsonify({'message': 'Something is wrong'}), 400)
 
 
 @app_views.route('/item_counts/<item_count_id>', methods=['DELETE'],
@@ -37,16 +43,18 @@ def delete_item_count(item_count_id):
     """
     Deletes a item_count Object
     """
+    try:
+        item_count = storage.get(ItemCount, item_count_id).first()
 
-    item_count = storage.get(ItemCount, item_count_id).first()
+        if not item_count:
+            abort(404)
 
-    if not item_count:
-        abort(404)
+        storage.delete(item_count)
+        storage.save()
 
-    storage.delete(item_count)
-    storage.save()
-
-    return make_response(jsonify({'message': 'ItemCount deleted successfully'}), 200)
+        return make_response(jsonify({'message': 'ItemCount deleted successfully'}), 200)
+    except Exception:
+        return make_response(jsonify({'message': 'Something is wrong'}), 400)
 
 
 @app_views.route('/item_counts', methods=['POST'], strict_slashes=False)
@@ -54,15 +62,15 @@ def post_item_count():
     """
     Creates a item_count
     """
-    if not request.get_json():
-        abort(400, description="Not a JSON")
-
-    if 'item_count' not in request.get_json():
-        abort(400, description="Missing item_count")
-    if 'item_name' not in request.get_json():
-        abort(400, description="Missing item_name")
-
     try:
+        if not request.get_json():
+            abort(400, description="Not a JSON")
+
+        if 'item_count' not in request.get_json():
+            abort(400, description="Missing item_count")
+        if 'item_name' not in request.get_json():
+            abort(400, description="Missing item_name")
+
         data = request.get_json()
         instance = ItemCount(**data)
         instance.save()
@@ -78,13 +86,12 @@ def put_item_count(item_count_id):
     """
     Updates a item_count
     """
-
-    item_count = storage.get(ItemCount, item_count_id).first()
-
-    if not item_count:
-        abort(404)
-
     try:
+        item_count = storage.get(ItemCount, item_count_id).first()
+
+        if not item_count:
+            abort(404)
+
         if not request.get_json():
             abort(400, description="Not a JSON")
 

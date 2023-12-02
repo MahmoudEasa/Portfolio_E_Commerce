@@ -12,23 +12,29 @@ def get_carts():
     Retrieves the list of all cart objects
     or a specific cart
     """
-    all_carts = storage.all(Cart).values()
-    list_carts = []
-    for cart in all_carts:
-        list_carts.append(cart.to_dict())
+    try:
+        all_carts = storage.all(Cart).values()
+        list_carts = []
+        for cart in all_carts:
+            list_carts.append(cart.to_dict())
 
-    return (jsonify(list_carts))
+        return (jsonify(list_carts))
+    except Exception:
+        return make_response(jsonify({'message': 'Something is wrong'}), 400)
 
 
 @app_views.route('/carts/<cart_id>', methods=['GET'], strict_slashes=False)
 def get_cart(cart_id):
     """ Retrieves an cart """
-    cart = storage.get(Cart, cart_id).first()
+    try:
+        cart = storage.get(Cart, cart_id).first()
 
-    if not cart:
-        abort(404)
+        if not cart:
+            abort(404)
 
-    return jsonify(cart.to_dict())
+        return jsonify(cart.to_dict())
+    except Exception:
+        return make_response(jsonify({'message': 'Something is wrong'}), 400)
 
 
 @app_views.route('/carts/<cart_id>', methods=['DELETE'],
@@ -37,16 +43,18 @@ def delete_cart(cart_id):
     """
     Deletes a cart Object
     """
+    try:
+        cart = storage.get(Cart, cart_id).first()
 
-    cart = storage.get(Cart, cart_id).first()
+        if not cart:
+            abort(404)
 
-    if not cart:
-        abort(404)
+        storage.delete(cart)
+        storage.save()
 
-    storage.delete(cart)
-    storage.save()
-
-    return make_response(jsonify({'message': 'Cart deleted successfully'}), 200)
+        return make_response(jsonify({'message': 'Cart deleted successfully'}), 200)
+    except Exception:
+        return make_response(jsonify({'message': 'Something is wrong'}), 400)
 
 
 @app_views.route('/carts', methods=['POST'], strict_slashes=False)
@@ -54,15 +62,15 @@ def post_cart():
     """
     Creates a cart
     """
-    if not request.get_json():
-        abort(400, description="Not a JSON")
-
-    if 'item_id' not in request.get_json():
-        abort(400, description="Missing item_id")
-    if 'user_id' not in request.get_json():
-        abort(400, description="Missing user_id")
-
     try:
+        if not request.get_json():
+            abort(400, description="Not a JSON")
+
+        if 'item_id' not in request.get_json():
+            abort(400, description="Missing item_id")
+        if 'user_id' not in request.get_json():
+            abort(400, description="Missing user_id")
+
         data = request.get_json()
         instance = Cart(**data)
         instance.save()
@@ -79,12 +87,12 @@ def put_cart(cart_id):
     """
     Updates a cart
     """
-    cart = storage.get(Cart, cart_id).first()
-
-    if not cart:
-        abort(404)
-
     try:
+        cart = storage.get(Cart, cart_id).first()
+
+        if not cart:
+            abort(404)
+
         if not request.get_json():
             abort(400, description="Not a JSON")
 
@@ -94,8 +102,10 @@ def put_cart(cart_id):
         for key, value in data.items():
             if key not in ignore:
                 setattr(cart, key, value)
+
         storage.save()
         cart = cart.to_dict()
+
         return make_response(jsonify(cart), 200)
     except Exception:
         return make_response(jsonify({'message': 'Something is wrong'}), 400)
