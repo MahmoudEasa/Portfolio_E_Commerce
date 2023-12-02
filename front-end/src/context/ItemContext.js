@@ -4,8 +4,8 @@ import { createContext, useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { CartContext } from "@/context/CartContext";
-import { imageDb, url } from "@/data";
-import { ref, deleteObject } from "firebase/storage";
+import { url, deleteImage } from "@/data";
+import { deleteObject } from "firebase/storage";
 
 export const ItemContext = createContext();
 
@@ -22,12 +22,9 @@ export const ItemProvider = ({ children }) => {
 			price: Number(item.price),
 		};
 
-		console.log(data);
-
 		axios
 			.post(`${url}/items`, data)
 			.then((res) => {
-				console.log(res.data);
 				const newItems = [...allItems, res.data];
 				setAllItems(newItems);
 				toast.success(`Product Added Successfully`);
@@ -48,6 +45,7 @@ export const ItemProvider = ({ children }) => {
 		axios
 			.put(`${url}/items/${id}`, itemData)
 			.then((res) => {
+				if (imgRef) deleteImage(id, allItems);
 				const updatedAllItems = allItems.map((item) => {
 					if (item.id == id) {
 						return { ...item, ...itemData };
@@ -75,14 +73,8 @@ export const ItemProvider = ({ children }) => {
 		axios
 			.delete(`${url}/items/${id}`)
 			.then((res) => {
-				console.log(res.data);
 				const itemsFilter = allItems.filter((i) => i.id != id);
-				const itemDeleted = allItems.filter((i) => i.id == id)[0].image;
-				console.log(itemDeleted);
-				// const imgRef = ref(imageDb, `images/${uid}`);
-				// deleteObject(imgRef).catch((error) => {
-				// 	console.log(error);
-				// })
+				deleteImage(id, allItems);
 				setAllItems(itemsFilter);
 				toast.success(`Product Deleted`);
 			})

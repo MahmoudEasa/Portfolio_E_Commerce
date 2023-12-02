@@ -16,6 +16,7 @@ class User(BaseModel, Base):
     phone = Column(String(20), nullable=False)
     address = Column(String(128), nullable=False)
     is_admin = Column(Boolean, nullable=False)
+    photo = Column(String(500), nullable=False)
 
 
 
