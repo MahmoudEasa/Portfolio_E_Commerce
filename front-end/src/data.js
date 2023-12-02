@@ -1,3 +1,20 @@
+// Initialise Firebase
+import { initializeApp } from "firebase/app";
+import { getStorage } from "firebase/storage";
+
+const firebaseConfig = {
+	apiKey: "AIzaSyCY0s8wik3CN_LBG7WkkjI-pYe3TXL5cjg",
+	authDomain: "portfolioecommerce-f1ee6.firebaseapp.com",
+	projectId: "portfolioecommerce-f1ee6",
+	storageBucket: "portfolioecommerce-f1ee6.appspot.com",
+	messagingSenderId: "655056260306",
+	appId: "1:655056260306:web:d7cd84b69be7cf4de7710b",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+export const imageDb = getStorage(app);
+
 export const links = [
 	{
 		id: 1,

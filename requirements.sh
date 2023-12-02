@@ -143,6 +143,12 @@ sTSKHe+QnnnoFmu4gnmDU31i
 
 
 # Front-End
+# firebase
+
+
+# uuid
+
+
 # node.js
 
 
