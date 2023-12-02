@@ -12,8 +12,9 @@ class Item(BaseModel, Base):
     name = Column(String(128), nullable=False, unique=True)
     discription = Column(String(1024), nullable=True)
     color = Column(String(60), nullable=False)
-    image = Column(String(128), nullable=True)
+    image = Column(String(400), nullable=True)
     price = Column(Integer, nullable=False)
+    count = Column(Integer, nullable=False, default=1)
 
 
     def __init__(self, *args, **kwargs):

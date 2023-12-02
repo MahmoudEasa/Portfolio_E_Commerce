@@ -4,7 +4,8 @@ import { createContext, useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { CartContext } from "@/context/CartContext";
-import { url } from "@/data";
+import { imageDb, url } from "@/data";
+import { ref, deleteObject } from "firebase/storage";
 
 export const ItemContext = createContext();
 
@@ -12,7 +13,7 @@ export const ItemProvider = ({ children }) => {
 	const { items } = useContext(CartContext);
 	const [allItems, setAllItems] = useState([]);
 
-	const addItem = (item) => {
+	const addItem = (item, imgRef) => {
 		const data = {
 			color: item.color,
 			discription: item.discription,
@@ -21,20 +22,29 @@ export const ItemProvider = ({ children }) => {
 			price: Number(item.price),
 		};
 
+		console.log(data);
+
 		axios
 			.post(`${url}/items`, data)
 			.then((res) => {
+				console.log(res.data);
 				const newItems = [...allItems, res.data];
 				setAllItems(newItems);
 				toast.success(`Product Added Successfully`);
 			})
 			.catch((err) => {
-				toast.error("Something is wrong");
+				if (imgRef) {
+					deleteObject(imgRef).catch((error) => {
+						console.log(error);
+					});
+				}
+				if (err.response) toast.error(err.response.data.message);
+				else toast.error("Something is wrong");
 				console.log(err);
 			});
 	};
 
-	const updateItem = (id, itemData) => {
+	const updateItem = (id, itemData, imgRef) => {
 		axios
 			.put(`${url}/items/${id}`, itemData)
 			.then((res) => {
@@ -50,7 +60,13 @@ export const ItemProvider = ({ children }) => {
 				toast.success("The data has been updated successfully");
 			})
 			.catch((err) => {
-				toast.error("Something is wrong");
+				if (imgRef) {
+					deleteObject(imgRef).catch((error) => {
+						console.log(error);
+					});
+				}
+				if (err.response) toast.error(err.response.data.message);
+				else toast.error("Something is wrong");
 				console.log(err);
 			});
 	};
@@ -61,6 +77,12 @@ export const ItemProvider = ({ children }) => {
 			.then((res) => {
 				console.log(res.data);
 				const itemsFilter = allItems.filter((i) => i.id != id);
+				const itemDeleted = allItems.filter((i) => i.id == id)[0].image;
+				console.log(itemDeleted);
+				// const imgRef = ref(imageDb, `images/${uid}`);
+				// deleteObject(imgRef).catch((error) => {
+				// 	console.log(error);
+				// })
 				setAllItems(itemsFilter);
 				toast.success(`Product Deleted`);
 			})

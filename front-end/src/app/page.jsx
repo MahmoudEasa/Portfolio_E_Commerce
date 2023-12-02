@@ -8,7 +8,7 @@ const Home = () => {
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
 					<div>
 						<h1 className="text-4xl text-gray-50 font-bold mb-4">
-							Welcome to Our E-commerce Project
+							Welcome to My E-commerce Project
 						</h1>
 						<p className="text-gray-400 mb-8">
 							Shop amazing products and get exclusive offers.
