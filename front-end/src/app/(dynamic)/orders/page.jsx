@@ -18,7 +18,7 @@ const Orders = () => {
 		if (!user) router.push("/");
 	}, [user, router]);
 
-	if (cartLen > 0) orders.map((c) => (subTotal += c.item.price));
+	if (cartLen > 0) orders.map((c) => (subTotal += c.item.price * c.qty));
 
 	return (
 		<div className="flex w-full min-h-min mt-5 flex-col justify-between bg-black shadow-xl">
@@ -71,7 +71,9 @@ const Orders = () => {
 															</Link>
 														</h3>
 														<p className="ml-4">
-															${order.item.price}
+															$
+															{order.item.price *
+																order.qty}
 														</p>
 													</div>
 													<p className="mt-1 text-sm text-gray-400">
@@ -80,9 +82,8 @@ const Orders = () => {
 												</div>
 												<div className="flex flex-1 items-end justify-between text-sm">
 													<p className="text-gray-400">
-														Qty
-														{" 1 "}
-														{}
+														Qty:
+														{" " + order.qty}
 													</p>
 
 													<div className="flex">

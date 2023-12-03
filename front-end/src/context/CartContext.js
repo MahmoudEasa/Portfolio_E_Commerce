@@ -23,11 +23,13 @@ export const CartProvider = ({ children }) => {
 		const user = JSON.parse(localStorage.getItem("user"));
 		let found = false;
 		let cartId = null;
+		let qty = "";
 
 		const newCart = [...cart];
 		newCart.map((c) => {
-			if (c.item_id == item.id) {
+			if (c.item.id == item.id) {
 				c.qty++;
+				qty = c.qty;
 				cartId = c.cart_id;
 				found = true;
 			}
@@ -44,7 +46,7 @@ export const CartProvider = ({ children }) => {
 		} else {
 			if (found) {
 				axios
-					.put(`${url}/carts/${cartId}`, { qty: item.qty + 1 })
+					.put(`${url}/carts/${cartId}`, { qty })
 					.then((res) => {
 						toast.success("Product Added to Cart");
 					})

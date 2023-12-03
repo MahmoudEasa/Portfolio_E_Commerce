@@ -18,39 +18,58 @@ const Cart = () => {
 		confirmCartCount,
 	} = useContext(CartContext);
 	const [carts, setCarts] = useState([]);
-	const [confirm, setConfirm] = useState(false);
 	let cartLen = 0;
 	let subTotal = 0;
 
 	if (carts) cartLen = carts.length;
 
-	if (cartLen > 0) carts.map((c) => (subTotal += c.item.price));
+	if (cartLen > 0) carts.map((c) => (subTotal += c.item.price * c.qty));
 
-	const increaseCount = (id) => {
-		setConfirm(true);
+	const setConfirm = (id, isConfirm) => {
 		const newCarts = [...carts];
 		newCarts.map((c) => {
-			if (c.cart_id == id) c.qty++;
+			if (c.cart_id == id) c.confirm = isConfirm;
+		});
+		setCarts(newCarts);
+	};
+
+	const increaseCount = (id) => {
+		const newCarts = [...carts];
+		newCarts.map((c) => {
+			if (c.cart_id == id) {
+				c.qty++;
+				setConfirm(c.cart_id, true);
+			}
 		});
 		setCarts(newCarts);
 	};
 
 	const decreaseCount = (id) => {
-		setConfirm(true);
 		const newCarts = [...carts];
 		newCarts.map((c) => {
-			if (c.cart_id == id) if (c.qty > 1) c.qty--;
+			if (c.cart_id == id)
+				if (c.qty > 1) {
+					c.qty--;
+					setConfirm(c.cart_id, true);
+				}
 		});
 		setCarts(newCarts);
 	};
 
-	const confirmCount = (id, qty) => {
-		confirmCartCount(id, qty);
-		setConfirm(false);
+	const confirmCount = (caret_id, qty) => {
+		confirmCartCount(caret_id, qty);
+		setConfirm(caret_id, false);
+	};
+
+	const setCartsFun = () => {
+		const newCarts = cart.map((c) => {
+			return { ...c, confirm: false };
+		});
+		setCarts(newCarts);
 	};
 
 	useEffect(() => {
-		setCarts(cart);
+		setCartsFun();
 	}, [cart]);
 
 	return (
@@ -201,6 +220,22 @@ const Cart = () => {
 																						>
 																							-
 																						</button>
+																						{product.confirm ? (
+																							<button
+																								onClick={() =>
+																									confirmCount(
+																										product.cart_id,
+																										product.qty
+																									)
+																								}
+																								type="button"
+																								className="font-black text-sm text-red-600 hover:text-red-500"
+																							>
+																								Confirm
+																							</button>
+																						) : (
+																							""
+																						)}
 																						<button
 																							onClick={() =>
 																								increaseCount(
@@ -259,29 +294,6 @@ const Cart = () => {
 												Shipping and taxes calculated at
 												checkout.
 											</p>
-											{confirm ? (
-												<div>
-													<p className="text-red-300">
-														Please confirm your
-														changes before closing
-														the card.
-													</p>
-													<button
-														onClick={() =>
-															confirmCount(
-																product.cart_id,
-																product.qty
-															)
-														}
-														type="button"
-														className="font-black text-lg text-red-600 hover:text-red-500"
-													>
-														Confirm
-													</button>
-												</div>
-											) : (
-												""
-											)}
 
 											<div className="mt-6">
 												<button
