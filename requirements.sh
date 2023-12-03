@@ -1,19 +1,20 @@
 #!/usr/bin/env bash
-# All requirements to portfolio project E-Commerce
 
 # ALTER TABLE items ADD COLUMN count INT DEFAULT 1 NOT NULL;
 # ALTER TABLE carts ADD COLUMN qty INT DEFAULT 1 NOT NULL;
+# ALTER TABLE buys ADD COLUMN qty INT DEFAULT 1 NOT NULL;
 # ALTER TABLE users ADD COLUMN photo VARCHAR(500) NULL;
 # ALTER TABLE items MODIFY COLUMN image VARCHAR(500) NULL;
 # ALTER TABLE items RENAME COLUMN discription TO description;
 # DESCRIBE items;
-
 # (dummyjson) https://dummyjson.com/
-
 
 # Run app
 # python3 -m api.v1.app
 
+
+
+# All requirements to portfolio project E-Commerce
 
 # Update and Upgrade apt-get
 sudo apt-get -y update
@@ -31,10 +32,6 @@ sudo pip3 install validators
 
 # phonenumbers
 sudo pip3 install phonenumbers
-
-
-# timedelta
-sudo pip3 install timedelta
 
 
 # secrets

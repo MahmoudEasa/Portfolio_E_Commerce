@@ -1,21 +1,57 @@
 "use client";
 
 import Image from "next/image";
-import { Fragment, useContext } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { CartContext } from "@/context/CartContext";
 import Link from "next/link";
 
 const Cart = () => {
-	const { cart, open, removeFromCart, checkout, toggleOpen, loading } =
-		useContext(CartContext);
+	const {
+		cart,
+		open,
+		removeFromCart,
+		checkout,
+		toggleOpen,
+		loading,
+		confirmCartCount,
+	} = useContext(CartContext);
+	const [carts, setCarts] = useState([]);
+	const [confirm, setConfirm] = useState(false);
 	let cartLen = 0;
 	let subTotal = 0;
 
-	if (cart) cartLen = cart.length;
+	if (carts) cartLen = carts.length;
 
-	if (cartLen > 0) cart.map((c) => (subTotal += c.item.price));
+	if (cartLen > 0) carts.map((c) => (subTotal += c.item.price));
+
+	const increaseCount = (id) => {
+		setConfirm(true);
+		const newCarts = [...carts];
+		newCarts.map((c) => {
+			if (c.cart_id == id) c.qty++;
+		});
+		setCarts(newCarts);
+	};
+
+	const decreaseCount = (id) => {
+		setConfirm(true);
+		const newCarts = [...carts];
+		newCarts.map((c) => {
+			if (c.cart_id == id) if (c.qty > 1) c.qty--;
+		});
+		setCarts(newCarts);
+	};
+
+	const confirmCount = (id, qty) => {
+		confirmCartCount(id, qty);
+		setConfirm(false);
+	};
+
+	useEffect(() => {
+		setCarts(cart);
+	}, [cart]);
 
 	return (
 		<Transition.Root show={open} as={Fragment}>
@@ -83,7 +119,7 @@ const Cart = () => {
 															className="-my-6 divide-y divide-gray-200"
 														>
 															{cartLen > 0 ? (
-																cart.map(
+																carts.map(
 																	(
 																		product
 																	) => (
@@ -148,12 +184,35 @@ const Cart = () => {
 																				</div>
 																				<div className="flex flex-1 items-end justify-between text-sm">
 																					<p className="text-gray-400">
-																						Qty
-																						{
-																							" 1 "
-																						}
-																						{}
+																						Qty:
+																						{" " +
+																							product.qty}
 																					</p>
+
+																					<div className="flex gap-3">
+																						<button
+																							onClick={() =>
+																								decreaseCount(
+																									product.cart_id
+																								)
+																							}
+																							type="button"
+																							className="font-black text-3xl text-indigo-600 hover:text-indigo-500"
+																						>
+																							-
+																						</button>
+																						<button
+																							onClick={() =>
+																								increaseCount(
+																									product.cart_id
+																								)
+																							}
+																							type="button"
+																							className="font-black text-3xl text-indigo-600 hover:text-indigo-500"
+																						>
+																							+
+																						</button>
+																					</div>
 
 																					<div className="flex">
 																						<button
@@ -200,10 +259,34 @@ const Cart = () => {
 												Shipping and taxes calculated at
 												checkout.
 											</p>
+											{confirm ? (
+												<div>
+													<p className="text-red-300">
+														Please confirm your
+														changes before closing
+														the card.
+													</p>
+													<button
+														onClick={() =>
+															confirmCount(
+																product.cart_id,
+																product.qty
+															)
+														}
+														type="button"
+														className="font-black text-lg text-red-600 hover:text-red-500"
+													>
+														Confirm
+													</button>
+												</div>
+											) : (
+												""
+											)}
+
 											<div className="mt-6">
 												<button
 													onClick={() =>
-														checkout(cart)
+														checkout(carts)
 													}
 													className="block text-center w-full rounded-md border
 																border-transparent bg-indigo-600 px-6
