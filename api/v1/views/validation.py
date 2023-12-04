@@ -11,12 +11,14 @@ def validate(req):
         if not validators.email(req['email']):
             return ("Email is invalid.")
 
+    """
     if 'phone' in req:
         try:
-            parsed_number = phonenumbers.parse(req['phone'], country_code)
+            parsed_number = phonenumbers.parse(req['phone'])
             if not phonenumbers.is_valid_number(parsed_number):
                 return ("Phone number is invalid.")
         except phonenumbers.phonenumberutil.NumberParseException:
             return ("Error parsing phone number.")
+    """
 
     return (None)

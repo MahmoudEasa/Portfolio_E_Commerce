@@ -1,0 +1,604 @@
+    1  mysql -uholberton_user -p -e 'SELECT user, Repl_slave_priv FROM mysql.user'
+    2  sudo mysql
+    3  mysql -uholberton_user -p -e 'SELECT user, Repl_slave_priv FROM mysql.user'
+    4  sudo mysql
+    5  ls -a
+    6  ls .config/
+    7  ls -a .config/
+    8  ls /etc/mysql/
+    9  sudo vi /etc/mysql/my.cnf
+   10  sudo vi /etc/mysql/mysql.cnf 
+   11  mysql -uholberton_user -p
+   12  sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf 
+   13  sudo cat /etc/mysql/mysql.conf.d/mysqld.cnf 
+   14  sudo ufw allow from 52.86.196.120 to any port 3306
+   15  sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf 
+   16  sudo cat /etc/mysql/mysql.conf.d/mysqld.cnf 
+   17  sudo systemctl restart mysql
+   18  sudo cat /etc/mysql/mysql.conf.d/mysqld.cnf 
+   19  sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf 
+   20  sudo cat /etc/mysql/mysql.conf.d/mysqld.cnf 
+   21  clear
+   22  curl -X GET "https://api.datadoghq.com/api/v1/hosts/totals" -H "Accept: application/json" -H "DD-API-KEY: ${DD_API_KEY}" -H "DD-APPLICATION-KEY: ${DD_APP_KEY}"
+   23  clear
+   24  sudo apt install -y net-tools
+   25  ls
+   26  git clone https://github.com/MahmoudEasa/AirBnB_clone_v2.git
+   27  ls
+   28  clear
+   29  cd AirBnB_clone_v2/web_flask/
+   30  ls
+   31  vi 0-hello_route.py 
+   32  python3 -m web_flask.0-hello_route
+   33  cd ..
+   34  python3 -m web_flask.0-hello_route
+   35  flask
+   36  sudo apt install python3-flask
+   37  clear
+   38  python3 -m web_flask.0-hello_route
+   39  netstat -an | grep :5000
+   40  lsof -i :5000
+   41  netstat -an | grep :5000
+   42  lsof -i :5000
+   43  netstat -an | grep 5000
+   44  python3 -m web_flask.0-hello_route
+   45  lsof -i :5000
+   46  netstat -an | grep :5000
+   47  lsof -i :5000
+   48  netstat -an | grep :5000
+   49  sudo fuser -k -n tcp 5000
+   50  netstat -an | grep :5000
+   51  python3 -m web_flask.0-hello_route
+   52  clear
+   53  pip3 --version
+   54  sudo apt install python3-pip
+   55  clear
+   56  pip3 --version
+   57  pip3 install gunicorn
+   58  pip install gunicorn
+   59  clear
+   60  sudo pip3 install gunicorn
+   61  gunicorn --version
+   62  gunicorn --bind 0.0.0.0:5000 web_flask.0-hello_route:app
+   63  ls
+   64  cat setup_mysql_dev.sql 
+   65  clear
+   66  sudo afw
+   67  sudo ufw
+   68  sudo ufw allow
+   69  clear
+   70  sudo vi /etc/nginx/sites-available/default 
+   71  sudo nginx -t
+   72  sudo nginx -s reload
+   73  gunicorn --bind 0.0.0.0:5000 web_flask.0-hello_route:app
+   74  clear
+   75  cat /etc/nginx/nginx.conf 
+   76  clear
+   77  cat /etc/nginx/sites-available/default 
+   78  clear
+   79  cat /etc/nginx/sites-available/default 
+   80  cat /etc/nginx/nginx.conf 
+   81  gunicorn --bind 0.0.0.0:5000 web_flask.0-hello_route:app
+   82  clear
+   83  clear
+   84  cd AirBnB_clone_v2/
+   85  clear
+   86  
+   87  curl 127.0.0.1:5000/airbnb-onepage/
+   88  clear
+   89  curl 127.0.0.1:5000/airbnb-onepage/
+   90  clear
+   91  curl 127.0.0.1:5000/airbnb-onepage/
+   92  
+   93  curl 127.0.0.1/airbnb-onepage/
+   94  curl -sI 35.231.193.217/airbnb-onepage/
+   95  clear
+   96  curl -s 127.0.0.1:5003/2-hbnb | tail -5
+   97  sudo systemctl status gunicorn.service
+   98  sudo vi /etc/systemd/system/gunicorn.service 
+   99  ls
+  100  sudo vi /etc/systemd/system/gunicorn.service 
+  101  sudo systemctl start gunicorn.service
+  102  sudo systemctl daemon-reload
+  103  sudo systemctl start gunicorn.service
+  104  systemctl daemon-reload
+  105  sudo systemctl daemon-reload
+  106  sudo systemctl start gunicorn.service
+  107  sudo vi /etc/systemd/system/gunicorn.service 
+  108  cd AirBnB_clone_v4/
+  109  pwd
+  110  cd..
+  111  cd ..
+  112  sudo vi /etc/systemd/system/gunicorn.service 
+  113  sudo systemctl start gunicorn.service
+  114  sudo systemctl daemon-reload
+  115  sudo systemctl start gunicorn.service
+  116  sudo systemctl status gunicorn.service
+  117  pip3 list
+  118  echo $PATH
+  119  sudo vi /etc/systemd/system/gunicorn.service 
+  120  which gunicorn
+  121  sudo vi /etc/systemd/system/gunicorn.service 
+  122  sudo systemctl start gunicorn.service
+  123  systemctl daemon-reload
+  124  sudo systemctl daemon-reload
+  125  sudo systemctl start gunicorn.service
+  126  sudo systemctl status gunicorn.service
+  127  sudo vi /etc/systemd/system/gunicorn.service 
+  128  sudo systemctl enable gunicorn.service
+  129  curl -s 127.0.0.1:5003/2-hbnb | tail -5
+  130  curl -s 12.13.14.15/ | tail -5
+  131  curl -s 12.13.14.15/
+  132  curl 12.13.14.15/
+  133  curl -s 54.160.79.52/ | tail -5
+  134  curl -s 54.160.79.52/
+  135  clear
+  136  ls
+  137  sudo netstat -ano | grep 5002
+  138  sudo lsof -ti :5002
+  139  sudo kill 8217 8323
+  140  sudo lsof -ti :5002
+  141  sudo netstat -ano | grep 5002
+  142  sudo netstat -ano | grep 5001
+  143  sudo lsof -ti :5001
+  144  sudo lsof -ti :5000
+  145  sudo kill 1570 1576 1577 1570
+  146  exit
+  147  sudo lsof -ti :5000
+  148  sudo lsof -ti :5001
+  149  sudo lsof -ti :5002
+  150  sudo lsof -ti :5003
+  151  sudo kill 1570 1575 1576
+  152  sudo lsof -ti :5000
+  153  sudo lsof -ti :5001
+  154  sudo lsof -ti :5002
+  155  sudo lsof -ti :5003
+  156  sudo lsof -ti :5002
+  157  sudo lsof -ti :5001
+  158  sudo lsof -ti :5000
+  159  sudo vi /etc/systemd/system/gunicorn.service 
+  160  sudo systemctl daemon-reload
+  161  sudo systemctl start gunicorn.service
+  162  sudo systemctl enable gunicorn.service
+  163  clear
+  164  pgrep gunicorn
+  165  clear
+  166  curl 127.0.0.1:5002/api/v1/states
+  167  curl 127.0.0.1/api/v1/states
+  168  clear
+  169  ls
+  170  git clone https://github.com/MahmoudEasa/Portfolio_E_Commerce.git
+  171  clear
+  172  ls
+  173  cp Portfolio_E_Commerce/
+  174  cd Portfolio_E_Commerce/
+  175  ls
+  176  ./show_tables.sh 
+  177  clear
+  178  ls
+  179  cat setup_mysql_dev.sql | mysql -hlocalhost -uroot -p
+  180  cat setup_mysql_dev.sql | sudo mysql -hlocalhost -uroot -p
+  181  ./show_tables.sh 
+  182  clear
+  183  ls
+  184  vi api/v1/app.py 
+  185  sudo netstat -ano | grep 5001
+  186  sudo lsof -ti :5001
+  187  gunicorn --bind 0.0.0.0:5001 api.v1.app:app
+  188  sudo pip3 install MySQLdb
+  189  gunicorn --bind 0.0.0.0:5001 api.v1.app:app
+  190  sudo pip3 install mysqlclient
+  191  python3
+  192  clear
+  193  pip install mysqlclient
+  194  sudo apt-get -y update
+  195  sudo apt-get -y upgrade
+  196  clear
+  197  sudo pip3 install mysqlclient
+  198  sudo apt install pkg-config
+  199  sudo pip3 install mysqlclient
+  200  sudo apt install libmysqlclient-dev
+  201  clear
+  202  telnet
+  203  netstat 
+  204  clear
+  205  sudo apt install libmysqlclient-dev
+  206  clear
+  207  sudo pip3 install mysqlclient
+  208  gunicorn --bind 0.0.0.0:5001 api.v1.app:app
+  209  sudo lsof -ti :5001
+  210  sudo kill 241767 241768 241769
+  211  gunicorn --bind 0.0.0.0:5001 api.v1.app:app
+  212  sudo pip3 install Flask-Login && sudo pip3 install validators && sudo pip3 install phonenumbers &&  echo
+  213  clear
+  214  gunicorn --bind 0.0.0.0:5001 api.v1.app:app
+  215  sudo pip3 install typing_extensions
+  216  gunicorn --bind 0.0.0.0:5001 api.v1.app:app
+  217  sudo pip uninstall markupsafe
+  218  sudo pip install markupsafe
+  219  sudo pip3 install markupsafe
+  220  gunicorn --bind 0.0.0.0:5001 api.v1.app:app
+  221  markupsafe --version
+  222  pip install werkzeug
+  223  gunicorn --bind 0.0.0.0:5001 api.v1.app:app
+  224  sudo pip install MarkupSafe
+  225  sudo pip install --upgrade jinja2
+  226  gunicorn --bind 0.0.0.0:5001 api.v1.app:app
+  227  sudo pip install --upgrade flask
+  228  gunicorn --bind 0.0.0.0:5001 api.v1.app:app
+  229  python3 -m api.v1.app:app
+  230  python3 -m api.v1.app
+  231  clear
+  232  vi /etc/nginx/sites-available/default 
+  233  sudo vi /etc/nginx/sites-available/default 
+  234  service nginx restart 
+  235  sudo service nginx restart 
+  236  vi api/v1/app.py 
+  237  cd Portfolio_E_Commerce/
+  238  clear
+  239  cd front-end/
+  240  ls
+  241  clear
+  242  npm run dev
+  243  node --version
+  244  sudo apt install nodejs
+  245  clear
+  246  npm run dev
+  247  sudo apt install npm
+  248  clear
+  249  npm run dev
+  250  npm i
+  251  clear
+  252  cd Portfolio_E_Commerce/
+  253  vi api/v1/app.py 
+  254  sudo reboot 
+  255  ؤمثشق
+  256  clear
+  257  cd Portfolio_E_Commerce/
+  258  vi api/v1/app.py 
+  259  sudo reboot 
+  260  vi /etc/nginx/sites-available/default 
+  261  sodu vi /etc/nginx/sites-available/default 
+  262  sudo vi /etc/nginx/sites-available/default 
+  263  sudo service nginx restart 
+  264  vi Portfolio_E_Commerce/front-end/src/data.js 
+  265  vi Portfolio_E_Commerce/front-end/.env.local 
+  266  which nohup
+  267  cd Portfolio_E_Commerce/front-end/
+  268  clear
+  269  ps aux | grep next
+  270  cd Portfolio_E_Commerce/front-end/
+  271  sudo vi /etc/systemd/system/nohup.service 
+  272  sudo systemctl daemon-reload
+  273  sudo systemctl start nohup.service
+  274  sudo systemctl enable nohup.service
+  275  sudo reboot 
+  276  clear
+  277  vi /etc/systemd/system/gunicorn.service 
+  278  vi /etc/systemd/system/nohup.service 
+  279  vi /etc/systemd/system/gunicorn.service 
+  280  sudo vi /etc/systemd/system/gunicorn.service 
+  281  sudo vi /etc/systemd/system/nohup.service 
+  282  sudo vi /etc/systemd/system/gunicorn.service 
+  283  sudo systemctl daemon-reload
+  284  sudo systemctl start gunicorn.service
+  285  sudo systemctl enable gunicorn.service
+  286  ls /tmp/
+  287  vi /tmp/airbnb-error.log 
+  288  sudo reboot 
+  289  vi /tmp/ecommerce-error.log 
+  290  vi /tmp/ecommerce-access.log 
+  291  clear
+  292  cd Portfolio_E_Commerce/
+  293  git pull
+  294  gs
+  295  git status
+  296  cd front-end/
+  297  npm run build
+  298  ps aux | grep next
+  299  sudo lsof -ti :3000
+  300  sudo kill 2710
+  301  npm run build
+  302  sudo lsof -ti :3000
+  303  sudo systemctl stop nohup.service
+  304  sudo lsof -ti :3000
+  305  npm run build
+  306  sudo lsof -ti :3000
+  307  cd Portfolio_E_Commerce/front-end/
+  308  npm run build
+  309  sudo systemctl daemon-reload
+  310  sudo systemctl start nohup.service
+  311  sudo systemctl enable nohup.service
+  312  sudo lsof -ti :3000
+  313  ls
+  314  ls src
+  315  vi src/context/ItemContext.js 
+  316  vi src/components/AddItemComponent/
+  317  vi src/components/AddItemComponent/AddItemComponent.jsx 
+  318  sudo systemctl stop nohup.service
+  319  sudo lsof -ti :3000
+  320  vi src/components/AddItemComponent/AddItemComponent.jsx 
+  321  gs
+  322  git status
+  323  git restore src/components/AddItemComponent/AddItemComponent.jsx
+  324  vi src/components/AddItemComponent/AddItemComponent.jsx 
+  325  sudo lsof -ti :3000
+  326  npm run build
+  327  sudo lsof -ti :3000
+  328  cd Portfolio_E_Commerce/front-end/
+  329  clear
+  330  npm run build
+  331  clear
+  332  sudo lsof -ti :3000
+  333  npm run build
+  334  clear
+  335  npm run build
+  336  clear
+  337  npm run build
+  338  clear
+  339  cd Portfolio_E_Commerce/front-end/
+  340  git pull
+  341  df
+  342  free
+  343  فخح
+  344  top
+  345  clear
+  346  git pull
+  347  rm -rf .next/
+  348  sudo reboot 
+  349  clear
+  350  clear
+  351  cd Portfolio_E_Commerce/front-end/
+  352  clear
+  353  ls -a
+  354  rm -rf .next/
+  355  ls -a
+  356  npm run dev
+  357  npm rn build
+  358  npm run build
+  359  clear
+  360  sudo lsof -ti :3000
+  361  clear
+  362  cd Portfolio_E_Commerce/front-end/
+  363  npm run build
+  364  sudo systemctl daemon-reload
+  365  sudo systemctl start nohup.service
+  366  sudo systemctl enable nohup.service
+  367  sudo reboot 
+  368  clear
+  369  vi /tmp/ecommerce-error.log 
+  370  vi /tmp/ecommerce-access.log 
+  371  git pull
+  372  cd Portfolio_E_Commerce/front-end/
+  373  git pull
+  374  gs
+  375  git status
+  376  vi nohup.out 
+  377  npm i sharp
+  378  sudo systemctl stop nohup.service
+  379  sudo lsof -ti :3000
+  380  npm i sharp
+  381  git status
+  382  git pull
+  383  npm run build
+  384  sudo systemctl daemon-reload
+  385  sudo systemctl start nohup.service
+  386  sudo systemctl enable nohup.service
+  387  sudo netstat -ano | grep 5001
+  388  sudo lsof -ti :5001
+  389  sudo kill 1594 5792 5821 6011
+  390  sudo lsof -ti :5001
+  391  sudo systemctl stop gunicorn.service
+  392  sudo lsof -ti :5001
+  393  sudo kill 9325 9326
+  394  sudo lsof -ti :5001
+  395  cd ..
+  396  sudo lsof -ti :5001
+  397  gunicorn --bind 0.0.0.0:5001 api.v1.app:app
+  398  python3 -m api.v1.app
+  399  vi api/v1/app.py 
+  400  vi api/v1/views/items.py 
+  401  python3 -m api.v1.app
+  402  vi api/v1/views/items.py 
+  403  python3 -m api.v1.app
+  404  vi api/v1/views/items.py 
+  405  python3 -m api.v1.app
+  406  vi api/v1/views/items.py 
+  407  python3 -m api.v1.app
+  408  vi api/v1/views/items.py 
+  409  python3 -m api.v1.app
+  410  ls /var/log/
+  411  vi /var/log/mysql/error.log 
+  412  vi /var/log/nginx/error.log
+  413  vi /var/log/nginx/error.log.10.gz 
+  414  python3 -m api.v1.app
+  415  vi api/v1/app.py 
+  416  python3 -m api.v1.app
+  417  vi api/v1/app.py 
+  418  python3 -m api.v1.app
+  419  clear
+  420  vi api/v1/views/items.py 
+  421  python3 -m api.v1.app
+  422  vi api/v1/views/items.py 
+  423  python3 -m api.v1.app
+  424  vi api/v1/views/items.py 
+  425  python3 -m api.v1.app
+  426  vi api/v1/views/items.py 
+  427  python3 -m api.v1.app
+  428  vi api/v1/views/items.py 
+  429  python3 -m api.v1.app
+  430  vi api/v1/views/items.py 
+  431  python3 -m api.v1.app
+  432  vi api/v1/views/items.py 
+  433  python3 -m api.v1.app
+  434  vi api/v1/views/items.py 
+  435  python3 -m api.v1.app
+  436  vi api/v1/views/items.py 
+  437  clear
+  438  sudo systemctl daemon-reload
+  439  sudo systemctl start gunicorn.service
+  440  sudo systemctl enable gunicorn.service
+  441  ls ~
+  442  ls -a ~
+  443  clear
+  444  gs
+  445  git status
+  446  vi api/v1/views/items.py 
+  447  git remote set-url origin https://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@github.com/MahmoudEasa/Portfolio_E_Commerce
+  448  git remote -v
+  449  git commit -am "Fix From Server"
+  450  git push
+  451  git pull
+  452  git status
+  453  git push
+  454  git pull
+  455  cd Portfolio_E_Commerce/
+  456  git pull
+  457  clear
+  458  cd front-end/
+  459  sudo systemctl stop nohup.service
+  460  sudo lsof -ti :3000
+  461  npm run build
+  462  clear
+  463  npm run build
+  464  vi src/components/AddItemComponent/AddItemComponent.jsx 
+  465  git pull
+  466  clear
+  467  npm run build
+  468  clear
+  469  git pull
+  470  clear
+  471  npm run build
+  472  clear
+  473  sudo systemctl daemon-reload
+  474  sudo systemctl start nohup.service
+  475  sudo systemctl enable nohup.service
+  476  sudo reboot
+  477  cd Portfolio_E_Commerce/
+  478  gs
+  479  git status
+  480  git pull
+  481  sudo systemctl stop nohup.service
+  482  sudo lsof -ti :3000
+  483  cd front-end/
+  484  npm run build
+  485  clear
+  486  npm run build
+  487  sudo lsof -ti :3000
+  488  sudo systemctl stop nohup.service
+  489  sudo lsof -ti :3000
+  490  cd Portfolio_E_Commerce/front-end/
+  491  npm run build
+  492  sudo systemctl daemon-reload
+  493  sudo systemctl start nohup.service
+  494  sudo systemctl enable nohup.service
+  495  sudo lsof -ti :3000
+  496  git pull
+  497  clear
+  498  sudo systemctl stop nohup.service
+  499  sudo lsof -ti :3000
+  500  npm run build
+  501  cd Portfolio_E_Commerce/front-end/
+  502  clear
+  503  ls
+  504  sudo mysql
+  505  clar
+  506  clear
+  507  cd P
+  508  cd Portfolio_E_Commerce/
+  509  clear
+  510  git pull
+  511  clear
+  512  sudo mysql
+  513  clear
+  514  git pull
+  515  sudo reboot 
+  516  ls -a
+  517  rm -rf .next/
+  518  ls -a
+  519  clear
+  520  python3 --version
+  521  flask version
+  522  pip show flask
+  523  clear
+  524  sudo systemctl stop gunicorn.service
+  525  sudo lsof -ti :5001
+  526  gunicorn --bind 0.0.0.0:5001 api.v1.app:app
+  527  cd Portfolio_E_Commerce/
+  528  gunicorn --bind 0.0.0.0:5001 api.v1.app:app
+  529  sudo lsof -ti :5001
+  530  python3 -m api.v1.app:app
+  531  python3 -m api.v1.app
+  532  clear
+  533  python3 -m api.v1.app
+  534  sudo apt-get remove datadog-agent
+  535  clear
+  536  python3 -m api.v1.app
+  537  rm -rf /etc/datadog-agent/
+  538  sudo rm -rf /etc/datadog-agent/
+  539  sudo rm -rf /var/log/datadog/
+  540  ls /var/lib/
+  541  clear
+  542  python3 -m api.v1.app
+  543  clear
+  544  sudo apt-get install -y datadog-agent
+  545  clear
+  546  python3 -m api.v1.app
+  547  gunicorn --bind 0.0.0.0:5001 api.v1.app:app
+  548  sudo pip install typing-extensions
+  549  gunicorn --bind 0.0.0.0:5001 api.v1.app:app
+  550  netstat -antlp
+  551  clear
+  552  gunicorn --bind 0.0.0.0:5001 api.v1.app:app
+  553  sudo lsof -ti :5001
+  554  gunicorn --bind 0.0.0.0:5001 api.v1.app:app
+  555  clear
+  556  sudo systemctl daemon-reload
+  557  sudo systemctl start gunicorn.service
+  558  sudo systemctl enable gunicorn.service
+  559  cd Portfolio_E_Commerce/
+  560  git pull
+  561  git status
+  562  cat front-end/nohup.out 
+  563  vi .gitignore 
+  564  gs
+  565  git stauts
+  566  git status
+  567  git add .
+  568  git commit -m "Commit in server"
+  569  git push
+  570  clear
+  571  git status
+  572  clear
+  573  vi api/v1/app.py 
+  574  git status
+  575  git commit -am "Fix in server"
+  576  git push
+  577  clear
+  578  git stauts
+  579  git status
+  580  git pull
+  581  cd front-end/
+  582  clear
+  583  sudo systemctl stop nohup.service
+  584  npm run build
+  585  sudo systemctl start nohup.service
+  586  clear
+  587  git status
+  588  cd Portfolio_E_Commerce/
+  589  cd front-end/
+  590  cd ..
+  591  vi api/v1/views/validation.py 
+  592  sudo systemctl restart gunicorn.service
+  593  vi api/v1/views/validation.py 
+  594  vi Portfolio_E_Commerce/
+  595  cd Portfolio_E_Commerce/
+  596  vi api/v1/views/validation.py 
+  597  sudo systemctl restart gunicorn.service
+  598  vi api/v1/views/validation.py 
+  599  sudo systemctl restart gunicorn.service
+  600  npm --version
+  601  node --version
+  602  hestory
+  603  history 
+  604  history > command-history.txt
