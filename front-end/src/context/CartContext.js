@@ -22,46 +22,39 @@ export const CartProvider = ({ children }) => {
 	const addToCart = (item) => {
 		const user = JSON.parse(localStorage.getItem("user"));
 		let found = false;
-		let cartId = null;
-		let qty = "";
-
 		const newCart = [...cart];
-		newCart.map((c) => {
+
+		cart.map((c) => {
 			if (c.item.id == item.id) {
-				c.qty++;
-				qty = c.qty;
-				cartId = c.cart_id;
 				found = true;
 			}
 		});
 
 		if (!user) {
-			if (!found) {
+			if (found) {
+				toast.info("Product already in Cart");
+			} else {
 				const newItem = { item, cart_id: item.id, qty: 1 };
 				newCart.push(newItem);
+				setCart(newCart);
+				localStorage.setItem("cart", JSON.stringify(newCart));
+				toast.success("Product Added to Cart");
 			}
-			setCart(newCart);
-			localStorage.setItem("cart", JSON.stringify(newCart));
-			toast.success("Product Added to Cart");
 		} else {
 			if (found) {
-				axios
-					.put(`${url}/carts/${cartId}`, { qty })
-					.then((res) => {
-						toast.success("Product Added to Cart");
-					})
-					.catch((err) => {
-						toast.error("Something is wrong");
-						console.log(err);
-					});
+				toast.info("Product already in Cart");
 			} else {
 				const data = {
 					user_id: user.id,
 					item_id: item.id,
+					qty: 1,
 				};
 				axios
 					.post(`${url}/carts`, data)
 					.then((res) => {
+						const newItem = { item, cart_id: res.id, qty: 1 };
+						newCart.push(newItem);
+						setCart(newCart);
 						toast.success("Product Added to Cart");
 					})
 					.catch((err) => {
@@ -175,16 +168,77 @@ export const CartProvider = ({ children }) => {
 	};
 
 	const confirmCartCount = (id, qty) => {
-		axios
-			.put(`${url}/carts/${id}`, { qty: qty })
-			.then((res) => {
-				toast.success("Confirmed, thank you.");
-			})
-			.catch((err) => {
-				toast.error("Something is wrong");
-				console.log(err);
+		const user = JSON.parse(localStorage.getItem("user"));
+
+		if (!user) {
+			const newCart = [...cart];
+			newCart.map((c) => {
+				if (c.cart_id == id) {
+					c.qty = qty;
+					c.confirm = false;
+				}
 			});
+			localStorage.setItem("cart", JSON.stringify(newCart));
+			toast.success("Product Added to Cart");
+		} else {
+			axios
+				.put(`${url}/carts/${id}`, { qty: qty })
+				.then((res) => {
+					toast.success("Confirmed, thank you.");
+				})
+				.catch((err) => {
+					toast.error("Something is wrong");
+					console.log(err);
+				});
+		}
 	};
+
+	const setConfirm = (id, isConfirm) => {
+		const newCarts = [...cart];
+		newCarts.map((c) => {
+			if (c.cart_id == id) c.confirm = isConfirm;
+		});
+		setCart(newCarts);
+	};
+
+	const increaseCount = (id) => {
+		const newCarts = [...cart];
+		newCarts.map((c) => {
+			if (c.cart_id == id) {
+				c.qty++;
+				setConfirm(c.cart_id, true);
+			}
+		});
+		setCart(newCarts);
+	};
+
+	const decreaseCount = (id) => {
+		const newCarts = [...cart];
+		newCarts.map((c) => {
+			if (c.cart_id == id)
+				if (c.qty > 1) {
+					c.qty--;
+					setConfirm(c.cart_id, true);
+				}
+		});
+		setCart(newCarts);
+	};
+
+	const confirmCount = (caret_id, qty) => {
+		confirmCartCount(caret_id, qty);
+		setConfirm(caret_id, false);
+	};
+
+	const setCartsFun = () => {
+		const newCarts = cart.map((c) => {
+			return { ...c, confirm: false };
+		});
+		setCart(newCarts);
+	};
+
+	useEffect(() => {
+		setCartsFun();
+	}, []);
 
 	useEffect(() => {
 		getCarts();
@@ -202,6 +256,9 @@ export const CartProvider = ({ children }) => {
 				loading,
 				checkout,
 				confirmCartCount,
+				increaseCount,
+				decreaseCount,
+				confirmCount,
 			}}
 		>
 			{children}

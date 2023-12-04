@@ -15,62 +15,15 @@ const Cart = () => {
 		checkout,
 		toggleOpen,
 		loading,
-		confirmCartCount,
+		increaseCount,
+		decreaseCount,
+		confirmCount,
 	} = useContext(CartContext);
-	const [carts, setCarts] = useState([]);
 	let cartLen = 0;
 	let subTotal = 0;
 
-	if (carts) cartLen = carts.length;
-
-	if (cartLen > 0) carts.map((c) => (subTotal += c.item.price * c.qty));
-
-	const setConfirm = (id, isConfirm) => {
-		const newCarts = [...carts];
-		newCarts.map((c) => {
-			if (c.cart_id == id) c.confirm = isConfirm;
-		});
-		setCarts(newCarts);
-	};
-
-	const increaseCount = (id) => {
-		const newCarts = [...carts];
-		newCarts.map((c) => {
-			if (c.cart_id == id) {
-				c.qty++;
-				setConfirm(c.cart_id, true);
-			}
-		});
-		setCarts(newCarts);
-	};
-
-	const decreaseCount = (id) => {
-		const newCarts = [...carts];
-		newCarts.map((c) => {
-			if (c.cart_id == id)
-				if (c.qty > 1) {
-					c.qty--;
-					setConfirm(c.cart_id, true);
-				}
-		});
-		setCarts(newCarts);
-	};
-
-	const confirmCount = (caret_id, qty) => {
-		confirmCartCount(caret_id, qty);
-		setConfirm(caret_id, false);
-	};
-
-	const setCartsFun = () => {
-		const newCarts = cart.map((c) => {
-			return { ...c, confirm: false };
-		});
-		setCarts(newCarts);
-	};
-
-	useEffect(() => {
-		setCartsFun();
-	}, [cart]);
+	if (cart) cartLen = cart.length;
+	if (cartLen > 0) cart.map((c) => (subTotal += c.item.price * c.qty));
 
 	return (
 		<Transition.Root show={open} as={Fragment}>
@@ -138,7 +91,7 @@ const Cart = () => {
 															className="-my-6 divide-y divide-gray-200"
 														>
 															{cartLen > 0 ? (
-																carts.map(
+																cart.map(
 																	(
 																		product
 																	) => (
@@ -298,7 +251,7 @@ const Cart = () => {
 											<div className="mt-6">
 												<button
 													onClick={() =>
-														checkout(carts)
+														checkout(cart)
 													}
 													className="block text-center w-full rounded-md border
 																border-transparent bg-indigo-600 px-6

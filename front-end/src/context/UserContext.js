@@ -29,6 +29,7 @@ export const UserProvider = ({ children }) => {
 							const data = {
 								user_id: res.data.id,
 								item_id: cart.item.id,
+								qty: cart.qty,
 							};
 							const response = await axios.post(
 								`${url}/carts`,
