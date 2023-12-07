@@ -1,6 +1,6 @@
 # Portfolio E-Commerce Project
 
-Demo: Open [http://54.160.79.52/](http://54.160.79.52/)
+Demo: Open [https://www.mahmoudeasa.tech/](https://www.mahmoudeasa.tech/)
 
 If you want to run the code locally:
 
