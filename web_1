@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 # Server 355534-web-01
+# Permissions (0664)
 
 ssh ubuntu@54.160.79.52
