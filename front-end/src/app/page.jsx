@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Home = () => {
 	return (
-		<section className="py-16">
+		<section className="py-16 flex items-center">
 			<div className="h-min mx-auto px-4">
 				<div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
 					<div>
