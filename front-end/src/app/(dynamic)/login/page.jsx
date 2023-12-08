@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useContext, useState, useEffect } from "react";
 import { UserContext } from "@/context/UserContext";
 import { useRouter } from "next/navigation";
+import { logo } from "@/data";
 
 const Login = () => {
 	const { user, login, errors } = useContext(UserContext);
@@ -31,7 +32,7 @@ const Login = () => {
 						width={100}
 						height={100}
 						className="mx-auto h-10 w-auto"
-						src="/images/logo2.png"
+						src={logo}
 						alt="Logo"
 					/>
 					<h2

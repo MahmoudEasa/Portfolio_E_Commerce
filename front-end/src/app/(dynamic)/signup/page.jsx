@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useContext, useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { UserContext } from "@/context/UserContext";
+import { logo } from "@/data";
 
 const SingUp = () => {
 	const router = useRouter();
@@ -38,7 +39,7 @@ const SingUp = () => {
 						width={100}
 						height={100}
 						className="mx-auto h-10 w-auto"
-						src="/images/logo2.png"
+						src={logo}
 						alt="Logo"
 					/>
 					<h2

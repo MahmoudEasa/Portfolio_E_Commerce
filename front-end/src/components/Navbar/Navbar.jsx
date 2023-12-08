@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Fragment, useContext } from "react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { links, linksProfile, adminLinks } from "../../data";
+import { links, linksProfile, adminLinks, logo } from "@/data";
 import Button from "../Button/Button";
 import { UserContext } from "@/context/UserContext";
 import { CartContext } from "@/context/CartContext";
@@ -58,7 +58,7 @@ const Navbar = () => {
 										<Image
 											width={150}
 											height={150}
-											src="/images/logo2.png"
+											src={logo}
 											alt="Your Company"
 										/>
 									</Link>
@@ -217,7 +217,7 @@ const Navbar = () => {
 								<Image
 									width={150}
 									height={150}
-									src="/images/logo2.png"
+									src={logo}
 									alt="Your Company"
 								/>
 							</Link>

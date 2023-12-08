@@ -101,3 +101,4 @@ export const icons = [
 ];
 
 export const url = process.env.NEXT_PUBLIC_URL;
+export const logo = "/images/logo.png";

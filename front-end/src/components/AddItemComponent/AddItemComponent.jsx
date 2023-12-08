@@ -7,7 +7,7 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { v4 } from "uuid";
 import { UserContext } from "@/context/UserContext";
 import { ItemContext } from "@/context/ItemContext";
-import { imageDb } from "@/data";
+import { imageDb, logo } from "@/data";
 import { toast } from "react-toastify";
 
 const AddItemComponent = (props) => {
@@ -109,7 +109,7 @@ const AddItemComponent = (props) => {
 						width={100}
 						height={100}
 						className="mx-auto h-10 w-auto"
-						src="/images/logo2.png"
+						src={logo}
 						alt="Logo"
 					/>
 					<h2
