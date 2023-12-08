@@ -20,16 +20,16 @@ export const metadata = {
 export default function RootLayout({ children }) {
 	return (
 		<html lang="en">
-			<body className="bg-black">
+			<body className="bg-black w-full">
 				<UserProvider>
 					<CartProvider>
 						<ItemProvider>
 							<OrderProvider>
-								<ToastContainer />
-								<main className="min-h-[100vh] flex flex-col justify-between">
+								<main className="min-h-[100vh] h-full flex flex-col justify-between">
 									<Navbar />
-									<Cart />
 									<div className="container mx-auto">
+										<ToastContainer />
+										<Cart />
 										{children}
 									</div>
 									<Footer />

@@ -29,9 +29,9 @@ const Login = () => {
 			>
 				<div className="sm:mx-auto sm:w-full sm:max-w-sm">
 					<Image
-						width={100}
-						height={100}
-						className="mx-auto h-10 w-auto"
+						width={1000}
+						height={1000}
+						className="mx-auto h-20 w-auto"
 						src={logo}
 						alt="Logo"
 					/>

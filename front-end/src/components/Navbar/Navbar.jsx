@@ -16,7 +16,7 @@ const Navbar = () => {
 	return (
 		<Disclosure
 			as="nav"
-			className="bg-gray-800 z-40 sticky top-0 left-0 w-[100vw]"
+			className="bg-gray-800 z-40 sticky top-0 left-0 w-full"
 		>
 			{({ open }) => (
 				<>
@@ -56,10 +56,11 @@ const Navbar = () => {
 								<div className="flex-shrink-0 items-center hidden sm:flex">
 									<Link href={"/"}>
 										<Image
-											width={150}
-											height={150}
+											width={180}
+											height={180}
 											src={logo}
 											alt="Your Company"
+											className="hover:opacity-80"
 										/>
 									</Link>
 								</div>
@@ -215,10 +216,11 @@ const Navbar = () => {
 						<div className="flex flex-shrink-0 justify-center items-center">
 							<Link href={"/"}>
 								<Image
-									width={150}
-									height={150}
+									width={180}
+									height={180}
 									src={logo}
 									alt="Your Company"
+									className="hover:opacity-80"
 								/>
 							</Link>
 						</div>
