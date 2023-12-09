@@ -56,8 +56,8 @@ const Navbar = () => {
 								<div className="flex-shrink-0 items-center hidden sm:flex">
 									<Link href={"/"}>
 										<Image
-											width={180}
-											height={180}
+											width={100}
+											height={100}
 											src={logo}
 											alt="Your Company"
 											className="hover:opacity-80"
@@ -216,8 +216,8 @@ const Navbar = () => {
 						<div className="flex flex-shrink-0 justify-center items-center">
 							<Link href={"/"}>
 								<Image
-									width={180}
-									height={180}
+									width={150}
+									height={150}
 									src={logo}
 									alt="Your Company"
 									className="hover:opacity-80"
