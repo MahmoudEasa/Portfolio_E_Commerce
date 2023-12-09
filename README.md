@@ -1,5 +1,21 @@
 # Portfolio E-Commerce Project
 
+<img src="landing_page.jpg" align="center" />
+
+## Introduction
+
+### Team member:
+
+  Mahmoud Easa
+  
+  33 years old software engineer
+  
+  A student at ALX
+
+### Person’s role:
+
+  I developed the entire project by myself, including the Front-End and Back-End. So, there is no other team member.
+
 Demo: Open [https://www.mahmoudeasa.tech/](https://www.mahmoudeasa.tech/)
 
 If you want to run the code locally:
