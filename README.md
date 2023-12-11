@@ -6,17 +6,19 @@
 
 ### Team member:
 
-  Mahmoud Easa
-  
-  33 years old software engineer
-  
-  A student at ALX
+Mahmoud Easa
+
+33 years old software engineer
+
+A student at ALX
 
 ### Person’s role:
 
-  I developed the entire project by myself, including the Front-End and Back-End. So, there is no other team member.
+I developed the entire project by myself, including the Front-End and Back-End. So, there is no other team member.
 
-Demo: Open [https://www.mahmoudeasa.tech/](https://www.mahmoudeasa.tech/)
+Demo: [https://www.mahmoudeasa.tech/](https://www.mahmoudeasa.tech/)
+
+Presentation: [https://docs.google.com/presentation/d/11L_ol1YL3KjVfQaccy4sY7ENSf38xwUR/edit?usp=sharing&ouid=109256112409143434776&rtpof=true&sd=true](https://docs.google.com/presentation/d/11L_ol1YL3KjVfQaccy4sY7ENSf38xwUR/edit?usp=sharing&ouid=109256112409143434776&rtpof=true&sd=true)
 
 If you want to run the code locally:
 
