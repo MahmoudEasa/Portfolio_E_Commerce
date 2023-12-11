@@ -20,6 +20,8 @@ Demo: [https://www.mahmoudeasa.tech/](https://www.mahmoudeasa.tech/)
 
 Presentation: [https://docs.google.com/presentation/d/11L_ol1YL3KjVfQaccy4sY7ENSf38xwUR/edit?usp=sharing&ouid=109256112409143434776&rtpof=true&sd=true](https://docs.google.com/presentation/d/11L_ol1YL3KjVfQaccy4sY7ENSf38xwUR/edit?usp=sharing&ouid=109256112409143434776&rtpof=true&sd=true)
 
+Trello board: [https://trello.com/invite/b/L9DlZkBv/ATTI739d75e077057e28b741884375050a559831269B/ecommirceproject](https://trello.com/invite/b/L9DlZkBv/ATTI739d75e077057e28b741884375050a559831269B/ecommirceproject)
+
 If you want to run the code locally:
 
 ## To Run the Back End
