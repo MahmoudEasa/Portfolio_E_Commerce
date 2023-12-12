@@ -8,7 +8,7 @@
 
 Mahmoud Easa
 
-33 years old software engineer
+Software engineer
 
 A student at ALX
 
