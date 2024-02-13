@@ -2,8 +2,8 @@
 # setup server
 
 
-apt-get -y update
-apt-get -y upgrade
+sudo apt-get -y update
+sudo apt-get -y upgrade
 
 
 # Variables
@@ -49,45 +49,45 @@ WantedBy=multi-user.target
 
 
 # Configures a new Ubuntu machine
-apt-get -y install nginx
-echo "Hello World!" | tee /var/www/html/index.nginx-debian.html
+sudo apt-get -y install nginx
+echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html
 if [ -z "$CHECK_REDIR" ]; then
-        sed -i "s@^\tlocation / {@&$REDIRECT@" $NGINX_SITE_FILE
+        sudo sed -i "s@^\tlocation / {@&$REDIRECT@" $NGINX_SITE_FILE
 fi
 
 if [ -z "$CHECK_ERR_PAGE" ]; then
-        sed -i "s@^\tserver_name _;@&$ERROR_PAGE@" $NGINX_SITE_FILE
+        sudo sed -i "s@^\tserver_name _;@&$ERROR_PAGE@" $NGINX_SITE_FILE
 fi
 
 if [ -z "$CHECK_X_SERVER_BY" ]; then
-        sed -i "s@^http {@&$ADD_HEADER@" $NGINX_CONF_FILE
+        sudo sed -i "s@^http {@&$ADD_HEADER@" $NGINX_CONF_FILE
 fi
 if [ -z "$CHECK_API" ]; then
-        sed -i "s@^\tserver_name _;@&$API@" $NGINX_SITE_FILE
+        sudo sed -i "s@^\tserver_name _;@&$API@" $NGINX_SITE_FILE
 fi
 
-service nginx restart
+sudo service nginx restart
 
 
 # Setup MySQL
-# cat Portfolio_E_Commerce/setup_mysql_dev.sql | mysql -hlocalhost -uroot
+# cat Portfolio_E_Commerce/setup_mysql_dev.sql | sudo mysql -hlocalhost -uroot
 
 
 # install the ufw firewall and setup a few rules
-apt-get -y install ufw
-ufw enable
-ufw default deny
-ufw allow 'Nginx HTTP'
-ufw allow ssh
-ufw allow http
-ufw allow https
-ufw allow mysql
-ufw reload
+sudo apt-get -y install ufw
+sudo ufw enable
+sudo ufw default deny
+sudo ufw allow 'Nginx HTTP'
+sudo ufw allow ssh
+sudo ufw allow http
+sudo ufw allow https
+sudo ufw allow mysql
+sudo ufw reload
 
 # Install Gunicorn
-apt-get -y install gunicorn
-touch $GUNICORN_PATH
-echo -e "$GUNICORN_SERVICE" > $GUNICORN_PATH
+sudo apt-get -y install gunicorn
+sudo touch $GUNICORN_PATH
+sudo echo -e "$GUNICORN_SERVICE" > $GUNICORN_PATH
 
 
 # Add aliases
@@ -102,11 +102,11 @@ alias vagup='vagrant up'
 "
 FIND=$(cat ~/.bashrc | grep "alias gs=")
 if [ -z "$FIND" ]; then
-	echo -e "$ALIASES" | tee -a ~/.bashrc >/dev/null
+	echo -e "$ALIASES" | sudo tee -a ~/.bashrc >/dev/null
 	source ~/.bashrc
 fi
 
 
-apt-get -y install mysql-client
-apt-get -y install mysql-server
-apt-get -y install python3-pip
+sudo apt-get -y install mysql-client
+sudo apt-get -y install mysql-server
+sudo apt-get -y install python3-pip
