@@ -7,21 +7,21 @@
 # All requirements to portfolio project E-Commerce
 
 # Update and Upgrade apt-get
-sudo apt-get -y update
-sudo apt-get -y upgrade
+apt-get -y update
+apt-get -y upgrade
 
 
 # Back-End
 # Flask-Login
-sudo pip3 install Flask-Login
+pip3 install Flask-Login
 
 
 # validators
-sudo pip3 install validators
+pip3 install validators
 
 
 # phonenumbers
-sudo pip3 install phonenumbers
+pip3 install phonenumbers
 
 
 # secrets
@@ -48,21 +48,21 @@ sudo pip3 install phonenumbers
 
 
 # flask
-sudo apt install python3-flask
+apt install python3-flask
 
 
 
 # flask_cors
-sudo pip3 install flask_cors
+pip3 install flask_cors
 
 
 
 # sqlalchemy
-sudo apt install libmysqlclient-dev
+apt install libmysqlclient-dev
 export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
-sudo apt install pkg-config
-sudo pip install mysqlclient
-sudo pip3 install sqlalchemy
+apt install pkg-config
+pip install mysqlclient
+pip3 install sqlalchemy
 
 
 
@@ -118,16 +118,16 @@ sTSKHe+QnnnoFmu4gnmDU31i
 =Xqbo
 -----END PGP PUBLIC KEY BLOCK-----
 "
-sudo echo -e "$KEY" > signature.key
-sudo apt-key add signature.key
+echo -e "$KEY" > signature.key
+apt-key add signature.key
 # add the apt repo
-sudo sh -c 'echo "deb http://repo.mysql.com/apt/ubuntu bionic mysql-5.7" >> /etc/apt/sources.list.d/mysql.list'
-sudo apt-get update
-sudo apt-cache policy mysql-server
+sh -c 'echo "deb http://repo.mysql.com/apt/ubuntu bionic mysql-5.7" >> /etc/apt/sources.list.d/mysql.list'
+apt-get update
+apt-cache policy mysql-server
 # Now install mysql 5.7
-sudo apt install -f mysql-client=5.7* mysql-community-server=5.7* mysql-server=5.7*
+apt install -f mysql-client=5.7* mysql-community-server=5.7* mysql-server=5.7*
 # Check if MySQL Service Is Running
-sudo systemctl status mysql
+systemctl status mysql
 
 
 # Front-End
@@ -155,7 +155,7 @@ sudo systemctl status mysql
 # axios
 
 
-sudo pip uninstall markupsafe
-sudo pip3 install markupsafe
-sudo pip uninstall werkzeug
-sudo pip3 install werkzeug
+pip uninstall markupsafe
+pip3 install markupsafe
+pip uninstall werkzeug
+pip3 install werkzeug
