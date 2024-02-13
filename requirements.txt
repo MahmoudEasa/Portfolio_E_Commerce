@@ -1,0 +1,18 @@
+# Flask-Login
+Flask-Login
+
+# validators
+validators
+
+# phonenumbers
+phonenumbers
+
+# flask
+python3-flask
+
+# flask_cors
+flask_cors
+
+# sqlalchemy
+mysqlclient
+sqlalchemy
