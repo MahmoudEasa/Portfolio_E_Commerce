@@ -7,8 +7,8 @@
 # All requirements to portfolio project E-Commerce
 
 # Update and Upgrade apt-get
-apt-get -y update
-apt-get -y upgrade
+# apt-get -y update
+# apt-get -y upgrade
 
 
 # Back-End
@@ -58,11 +58,11 @@ pip3 install flask_cors
 
 
 # sqlalchemy
-apt install libmysqlclient-dev
-export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
-apt install pkg-config
-pip install mysqlclient
-pip3 install sqlalchemy
+# apt install libmysqlclient-dev
+# export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
+# apt install pkg-config
+# pip install mysqlclient
+# pip3 install sqlalchemy
 
 
 
@@ -118,16 +118,16 @@ sTSKHe+QnnnoFmu4gnmDU31i
 =Xqbo
 -----END PGP PUBLIC KEY BLOCK-----
 "
-echo -e "$KEY" > signature.key
-apt-key add signature.key
-# add the apt repo
-sh -c 'echo "deb http://repo.mysql.com/apt/ubuntu bionic mysql-5.7" >> /etc/apt/sources.list.d/mysql.list'
-apt-get update
-apt-cache policy mysql-server
-# Now install mysql 5.7
-apt install -f mysql-client=5.7* mysql-community-server=5.7* mysql-server=5.7*
-# Check if MySQL Service Is Running
-systemctl status mysql
+# echo -e "$KEY" > signature.key
+# apt-key add signature.key
+# # add the apt repo
+# sh -c 'echo "deb http://repo.mysql.com/apt/ubuntu bionic mysql-5.7" >> /etc/apt/sources.list.d/mysql.list'
+# apt-get update
+# apt-cache policy mysql-server
+# # Now install mysql 5.7
+# apt install -f mysql-client=5.7* mysql-community-server=5.7* mysql-server=5.7*
+# # Check if MySQL Service Is Running
+# systemctl status mysql
 
 
 # Front-End
@@ -155,7 +155,7 @@ systemctl status mysql
 # axios
 
 
-pip uninstall markupsafe
-pip3 install markupsafe
-pip uninstall werkzeug
-pip3 install werkzeug
+# pip uninstall markupsafe
+# pip3 install markupsafe
+# pip uninstall werkzeug
+# pip3 install werkzeug
