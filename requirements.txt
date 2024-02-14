@@ -5,7 +5,7 @@ validators
 phonenumbers
 flask_cors
 mysqlclient
-libmysqlclient-dev
+# libmysqlclient-dev
 sqlalchemy
 
 #!/usr/bin/env bash
