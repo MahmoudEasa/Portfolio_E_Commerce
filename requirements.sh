@@ -58,11 +58,11 @@ pip3 install flask_cors
 
 
 # sqlalchemy
-# apt install libmysqlclient-dev
-# export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
-# apt install pkg-config
-# pip install mysqlclient
-# pip3 install sqlalchemy
+apt install libmysqlclient-dev
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
+apt install pkg-config
+pip install mysqlclient
+pip3 install sqlalchemy
 
 
 
