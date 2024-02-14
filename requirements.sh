@@ -127,7 +127,7 @@ sTSKHe+QnnnoFmu4gnmDU31i
 # # Now install mysql 5.7
 apt install -f mysql-client=5.7* mysql-community-server=5.7* mysql-server=5.7*
 # # Check if MySQL Service Is Running
-systemctl status mysql
+# systemctl status mysql
 
 
 # Front-End
