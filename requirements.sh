@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# gunicorn --bind 0.0.0.0:5001 api.v1.app:app
+
 # Run app
 # python3 -m api.v1.app
 

@@ -9,6 +9,7 @@ from datetime import timedelta
 
 
 origins = [
+        "*",
         "https://www.mahmoudeasa.tech",
         "https://portfolio-e-commerce-seven.vercel.app",
         "https://portfolio-e-commerce-o9rryjx3b-mahmoudeasa.vercel.app",
